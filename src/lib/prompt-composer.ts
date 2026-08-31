@@ -46,24 +46,9 @@ const HOSPITAL_CONTACTS = {
 };
 
 // =================================================================
-// Condition-tag derivation from free-text patient conditions
+// Condition-tag derivation — see ./conditions.ts (shared with the engine)
 // =================================================================
-function deriveConditionTags(patient: Patient): string[] {
-  const text = patient.conditions.join(" ").toLowerCase();
-  const tags = new Set<string>();
-
-  if (/t2dm|t1dm|diabet/.test(text)) tags.add("diabetes");
-  if (/htn|hypertens|stemi|nstemi|\bmi\b|myocardial|cad|ihd|angina|acs/.test(text)) tags.add("cardiovascular");
-  if (/heart failure|\bhf\b|hfref|ef 30|ef\s*<\s*40|ef 40/.test(text)) tags.add("heart_failure");
-  if (/atrial fibrillation|\baf\b|afib/.test(text)) tags.add("atrial_fibrillation");
-  if (/ckd|chronic kidney|renal|nephropathy/.test(text)) tags.add("ckd");
-  if (/nafld|fatty liver|nash/.test(text)) tags.add("nafld");
-  if (/rheumatic|\brhd\b|valvular|mitral stenosis|aortic stenosis|prosthetic valve/.test(text)) tags.add("rheumatic_heart_disease");
-  if (patient.age >= 65) tags.add("elderly");
-  if (/retinopath|neuropath/.test(text)) tags.add("diabetes_complications");
-
-  return Array.from(tags);
-}
+import { deriveConditionTags } from "./conditions";
 
 // =================================================================
 // Data pulls
