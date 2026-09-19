@@ -37,45 +37,31 @@ import type {
 } from "./types";
 
 // =================================================================
-// Condition detection helpers
+// Condition detection — see ./conditions.ts (shared with the composer)
 // =================================================================
-function hasCondition(patient: Patient, ...keywords: string[]): boolean {
-  const text = patient.conditions.join(" | ").toLowerCase();
-  return keywords.some((k) => text.includes(k.toLowerCase()));
-}
+export {
+  hasCondition,
+  isElderly,
+  isHF,
+  isAF,
+  isDiabetic,
+  hasHTN,
+  hasStroke,
+  hasVascularDisease,
+  hasAllergy,
+} from "./conditions";
 
-function isElderly(patient: Patient): boolean {
-  return patient.age >= 65;
-}
-
-function isHF(patient: Patient): boolean {
-  return hasCondition(patient, "heart failure", "hf", "hfref", "ef");
-}
-
-function isAF(patient: Patient): boolean {
-  return hasCondition(patient, "atrial fibrillation", "af ", "afib", "af)", "(af");
-}
-
-function isDiabetic(patient: Patient): boolean {
-  return hasCondition(patient, "t2dm", "diabetes", "diabetic", "t1dm", "dm ");
-}
-
-function hasHTN(patient: Patient): boolean {
-  return hasCondition(patient, "htn", "hypertension");
-}
-
-function hasStroke(patient: Patient): boolean {
-  return hasCondition(patient, "stroke", "tia", "cva");
-}
-
-function hasVascularDisease(patient: Patient): boolean {
-  return hasCondition(patient, "mi", "myocardial", "pad", "cad", "ihd", "stemi", "nstemi", "angina");
-}
-
-function hasAllergy(patient: Patient, ...keywords: string[]): boolean {
-  const text = patient.allergies.join(" | ").toLowerCase();
-  return keywords.some((k) => text.includes(k.toLowerCase()));
-}
+import {
+  hasCondition,
+  isElderly,
+  isHF,
+  isAF,
+  isDiabetic,
+  hasHTN,
+  hasStroke,
+  hasVascularDisease,
+  hasAllergy,
+} from "./conditions";
 
 // =================================================================
 // Drug name → DB resolver
@@ -371,6 +357,30 @@ function checkAllergies(patient: Patient, meds: Medication[], allDrugs: Drug[]):
     }
   }
 
+  // Aspirin / NSAID allergy.
+  //
+  // Aspirin is the one drug every ACS pathway in this formulary starts with,
+  // so an allergy to it has to be surfaced before any recommendation is made.
+  // Severity follows the reaction on file: a documented rash is a caution
+  // (aspirin is often still given, or the patient desensitised), anaphylaxis
+  // or bronchospasm is an absolute stop.
+  if (hasAllergy(patient, "aspirin", "salicylate", "nsaid", "ibuprofen", "diclofenac")) {
+    const severe = hasAllergy(patient, "anaphylaxis", "angioedema", "bronchospasm", "asthma");
+    flags.push({
+      category: "allergy",
+      severity: severe ? "critical" : "warning",
+      title: severe
+        ? "Aspirin/NSAID allergy with a severe reaction on file — DO NOT give aspirin"
+        : "Aspirin/NSAID allergy on file — review before antiplatelet loading",
+      detail: severe
+        ? "Severe reaction documented. Do not load aspirin. Use Clopidogrel 300-600mg or Ticagrelor 180mg as single-agent P2Y12 loading and involve cardiology; aspirin desensitisation only in a monitored setting."
+        : `Documented reaction: ${patient.allergies.join(", ")}. A mild cutaneous reaction is not an absolute contraindication — confirm the reaction history before loading aspirin. If aspirin is withheld, Clopidogrel (Plavix, NLEM) is the substitute P2Y12 loading agent.`,
+      drugs_involved: ["Aspirin"],
+      action: severe ? "DO NOT USE aspirin — load a P2Y12 inhibitor instead" : "Confirm reaction history before aspirin loading",
+      guideline_source: "CSI 2017",
+    });
+  }
+
   // Penicillin allergy — flag for downstream antibiotic prescribing (informational; doesn't restrict cardiac drugs)
   if (hasAllergy(patient, "penicillin")) {
     flags.push({
@@ -487,8 +497,19 @@ function listDrugsToAvoid(patient: Patient, eGFR: number | null): { drug: string
   if (hasAllergy(patient, "sulfonamide")) {
     avoid.push({ drug: "Sulfonylureas", reason: "Potential sulfonamide cross-reactivity" });
   }
-  if (hasAllergy(patient, "penicillin", "anaphylaxis")) {
-    avoid.push({ drug: "Penicillins, Cephalosporins", reason: "Anaphylaxis history" });
+  if (hasAllergy(patient, "penicillin", "beta-lactam", "amoxicillin")) {
+    avoid.push({
+      drug: "Penicillins, Cephalosporins",
+      reason: hasAllergy(patient, "anaphylaxis") ? "Anaphylaxis history" : "Penicillin allergy on file",
+    });
+  }
+  if (hasAllergy(patient, "aspirin", "salicylate", "nsaid")) {
+    avoid.push({
+      drug: "Aspirin",
+      reason: hasAllergy(patient, "anaphylaxis", "angioedema", "bronchospasm")
+        ? "Severe aspirin/NSAID reaction documented"
+        : "Aspirin/NSAID allergy on file — confirm reaction before use",
+    });
   }
   return avoid;
 }
@@ -534,12 +555,17 @@ export async function runSafetyChecks(patient: Patient): Promise<SafetyReport> {
 
   // AF-specific anticoagulation flag
   if (computed.chads_vasc !== null) {
-    const indicated = shouldAnticoagulate(computed.chads_vasc, patient.sex);
+    const valvular = hasCondition(patient, "rheumatic", "valvular", "rhd", "mitral stenosis", "prosthetic valve");
+    const indicated = valvular || shouldAnticoagulate(computed.chads_vasc, patient.sex);
     flags.push({
       category: "recommendation",
       severity: indicated ? "warning" : "info",
-      title: `CHA₂DS₂-VASc = ${computed.chads_vasc} → ${indicated ? "Anticoagulation INDICATED" : "Anticoagulation optional"}`,
-      detail: indicated
+      title: valvular
+        ? `Valvular AF → Anticoagulation INDICATED regardless of CHA₂DS₂-VASc (score ${computed.chads_vasc})`
+        : `CHA₂DS₂-VASc = ${computed.chads_vasc} → ${indicated ? "Anticoagulation INDICATED" : "Anticoagulation optional"}`,
+      detail: valvular
+        ? `CHA₂DS₂-VASc was derived and validated in NON-valvular AF and does not govern this decision. AF with rheumatic mitral stenosis or a prosthetic valve is an anticoagulation indication in its own right — the score is shown for completeness only. Warfarin, INR 2-3.`
+        : indicated
         ? `Threshold met (${patient.sex === "F" ? "≥3 for women" : "≥2 for men"}). Recommend OAC unless contraindicated.`
         : "Below threshold. Consider patient preference + bleeding risk.",
       guideline_source: "IHRS/CSI 2018",
