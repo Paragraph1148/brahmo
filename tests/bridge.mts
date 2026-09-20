@@ -9,7 +9,14 @@
 //   {"fn":"calculateEGFR","args":[1.2,55,"M"]}  ->  {"ok":true,"value":62}
 // =================================================================
 import { createInterface } from "node:readline";
+import "./harness/env.mjs";
+import { installShim } from "./harness/db.mjs";
 import * as calc from "../src/lib/calculators.js";
+
+// The safety engine talks to the database, so the PGlite shim has to be in
+// place before it is imported. Calculators are pure and need none of this.
+await installShim();
+const engine = await import("../src/lib/safety-engine.js");
 
 type Handler = (args: unknown[]) => unknown;
 
@@ -26,15 +33,21 @@ const FNS: Record<string, Handler> = {
   bmiCategory: ([b]) => calc.bmiCategory(b as number),
 };
 
+// Async handlers are kept separate: the safety engine hits the database.
+const ASYNC_FNS: Record<string, (args: unknown[]) => Promise<unknown>> = {
+  runSafetyChecks: async ([patient]) => engine.runSafetyChecks(patient as never),
+};
+
 const rl = createInterface({ input: process.stdin, crlfDelay: Infinity });
 for await (const line of rl) {
   if (!line.trim()) continue;
   let out: unknown;
   try {
     const { fn, args } = JSON.parse(line) as { fn: string; args: unknown[] };
+    const asyncHandler = ASYNC_FNS[fn];
     const handler = FNS[fn];
-    if (!handler) throw new Error(`unknown fn: ${fn}`);
-    const value = handler(args);
+    if (!asyncHandler && !handler) throw new Error(`unknown fn: ${fn}`);
+    const value = asyncHandler ? await asyncHandler(args) : handler(args);
     // JSON has no -0; normalise so it cannot masquerade as a difference.
     out = { ok: true, value: Object.is(value, -0) ? 0 : value };
   } catch (e) {

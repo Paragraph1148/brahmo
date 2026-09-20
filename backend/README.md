@@ -7,7 +7,7 @@ input through both, so a rule that was ported wrong fails here.
 
 ```bash
 uv sync --extra dev
-uv run pytest            # 24 tests
+uv run pytest            # 51 tests
 ```
 
 The TypeScript side must be installed (`npm install` at the repo root); the
@@ -68,6 +68,45 @@ pins the table above, and
 `test_exact_egfr_bands_are_stable_under_one_ulp_of_creatinine` asserts the
 property the rounded path cannot offer.
 
+## What the divergence suite found
+
+`tests/divergence/` holds the places this port deliberately disagrees with the
+TypeScript engine. Each test asserts both sides: what TypeScript does today,
+read live over the bridge, and what this port does instead. If the original is
+ever fixed, the test fails and says to retire it.
+
+### Reaction severity was read across allergy entries
+
+`hasAllergy(patient, "anaphylaxis", ...)` searches the entire allergy list
+joined into one string. So the severity of *one* substance's reaction is
+decided by whatever word appears anywhere in the list. Against the live engine:
+
+```
+["Aspirin (mild rash, no anaphylaxis)"]
+  -> aspirin flag: warning                         correct
+["Penicillin (anaphylaxis)", "Aspirin (mild rash, no anaphylaxis)"]
+  -> aspirin flag: critical, "DO NOT give aspirin" wrong
+```
+
+The aspirin entry says "no anaphylaxis" in as many words and is overruled by
+the penicillin line. In a STEMI pathway that withholds aspirin from a patient
+who can safely take it — a harm, not a conservative default. It is the same
+cross-attribution family as the substring bug the project already fixed: a
+property belonging to one record applied to another.
+
+`domain/allergy.py` parses each line into a substance and its own reaction, and
+severity is only ever read from the entry that matched. The property is pinned
+directly: dropping every non-aspirin entry must not change the aspirin verdict.
+
+### "No known drug allergies" parsed as an allergy to drugs
+
+Found by a unit test written against the new parser, and present in the
+TypeScript too. The negation guard only looks immediately before the keyword,
+and in `No known drug allergies` the negation is four words away from `drug`.
+The commonest value in the field read as a positive finding. `AllergyList` now
+recognises the no-allergy sentinels (`NKDA`, `NKA`, `none`, `nil`, `no known
+drug allergies`, `denies allergies`) and carries no entry for them.
+
 ## Design changes from the TypeScript
 
 - **eGFR is not rounded before banding.** Above.
@@ -76,3 +115,5 @@ property the rounded path cannot offer.
   them apart. Comparing across dimensions raises instead of returning a number.
 - **`js_round` is explicit.** Python's `round` is banker's rounding, so a
   transcribed `Math.round` silently disagrees on every half. Pinned by test.
+- **Allergies are records, not strings.** A substance and its own reaction, so
+  severity cannot cross entries. Above.
