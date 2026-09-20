@@ -1,0 +1,65 @@
+{
+  "patient": {
+    "age": 52,
+    "allergies": [
+      "Penicillin (ANAPHYLAXIS - 2020)"
+    ],
+    "bmi": 26.8,
+    "conditions": [
+      "Acute chest pain × 2hrs",
+      "Smoker 20 pack-years",
+      "Family hx father MI at 50"
+    ],
+    "created_at": {},
+    "id": 4,
+    "income_context": "ESI-covered worker",
+    "insurance": {
+      "notes": "Covers emergency",
+      "provider": "ESI"
+    },
+    "labs": {
+      "Cr": 1,
+      "ECG": "ST elevation V1-V4 (anterior STEMI)",
+      "Glucose": 142,
+      "K": 4.2,
+      "Troponin": 12.4,
+      "eGFR": 84
+    },
+    "medications": [],
+    "patient_label": "Acute STEMI",
+    "sex": "M",
+    "vitals": {
+      "BP": "95/62",
+      "HR": 108,
+      "RR": 24,
+      "SpO2": 93
+    }
+  },
+  "question": "STEMI just walked in — chest pain 2 hrs, anterior ST elevation. What's the immediate protocol?",
+  "origin": "seed",
+  "report": {
+    "computed": {
+      "bmi_category": "Obese I (Asian)",
+      "chads_vasc": null,
+      "eGFR": 91,
+      "eGFR_stage": "Normal (G1)"
+    },
+    "drugs_to_avoid": [
+      {
+        "drug": "Penicillins, Cephalosporins",
+        "reason": "Anaphylaxis history"
+      }
+    ],
+    "flags": [
+      {
+        "action": "Document; avoid β-lactams",
+        "category": "allergy",
+        "detail": "ANAPHYLAXIS documented. Avoid all penicillins and cephalosporins. Use alternative antibiotic class (macrolide, fluoroquinolone, glycopeptide) if antibiotics needed during admission. Note: aspirin, clopidogrel, ticagrelor, heparin, and fibrinolytics are SAFE.",
+        "severity": "caution",
+        "title": "Penicillin allergy on file"
+      }
+    ],
+    "patient_id": 4,
+    "recommended_drug_classes": []
+  }
+}

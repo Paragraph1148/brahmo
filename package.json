@@ -11,7 +11,9 @@
     "bench": "tsx tests/bench.mts",
     "audit:detection": "tsx tests/detection-audit.mts",
     "audit:tags": "tsx tests/tag-agreement.mts",
-    "inspect": "tsx tests/inspect.mts"
+    "inspect": "tsx tests/inspect.mts",
+    "golden": "tsx tests/golden.mts",
+    "bridge": "tsx tests/bridge.mts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",

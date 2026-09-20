@@ -1,0 +1,262 @@
+{
+  "patient": {
+    "age": 58,
+    "allergies": [
+      "NKDA"
+    ],
+    "bmi": 30.2,
+    "conditions": [
+      "T2DM (8yr)",
+      "Heart Failure (EF 30%)",
+      "HTN",
+      "CKD 3a"
+    ],
+    "created_at": {},
+    "id": 6,
+    "income_context": "Middle-class with chronic disease costs",
+    "insurance": {
+      "notes": "₹5K/month cap",
+      "provider": "Star Health"
+    },
+    "labs": {
+      "BNP": 850,
+      "Cr": 1.4,
+      "HbA1c": 8.6,
+      "K": 5.1,
+      "Na": 134,
+      "eGFR": 48
+    },
+    "medications": [
+      {
+        "dose": "500mg BD",
+        "drug": "Metformin"
+      },
+      {
+        "dose": "1mg OD",
+        "drug": "Glimepiride"
+      },
+      {
+        "dose": "10mg OD",
+        "drug": "Ramipril"
+      },
+      {
+        "dose": "12.5mg BD",
+        "drug": "Carvedilol"
+      },
+      {
+        "dose": "40mg BD",
+        "drug": "Furosemide"
+      },
+      {
+        "dose": "25mg OD",
+        "drug": "Spironolactone"
+      },
+      {
+        "dose": "40mg HS",
+        "drug": "Atorvastatin"
+      }
+    ],
+    "patient_label": "Diabetes + Heart Failure",
+    "sex": "F",
+    "vitals": {
+      "BP": "110/68",
+      "HR": 72,
+      "SpO2": 94
+    }
+  },
+  "question": "HbA1c is 8.6% with HFrEF (EF 30%) and CKD 3a. How do I optimize her diabetes regimen given her cardiac status?",
+  "origin": "seed",
+  "report": {
+    "computed": {
+      "bmi_category": "Obese II (Asian)",
+      "chads_vasc": null,
+      "eGFR": 44,
+      "eGFR_stage": "CKD 3b"
+    },
+    "drugs_to_avoid": [
+      {
+        "drug": "Pioglitazone",
+        "reason": "Fluid retention worsens HF (contraindicated)"
+      },
+      {
+        "drug": "Saxagliptin",
+        "reason": "FDA black box - increased HF hospitalization (SAVOR-TIMI)"
+      }
+    ],
+    "flags": [
+      {
+        "action": "STOP - switch to insulin or Linagliptin",
+        "category": "hypoglycemia",
+        "detail": "Sulfonylureas accumulate in renal impairment causing prolonged hypoglycemia. RSSDI 2022: STOP sulfonylurea when eGFR <30; use insulin or Linagliptin (no renal adjustment needed).",
+        "drugs_involved": [
+          "Glimepiride"
+        ],
+        "guideline_source": "RSSDI 2022",
+        "severity": "critical",
+        "title": "Glimepiride in CKD (eGFR 44): high hypoglycemia risk"
+      },
+      {
+        "action": "Monitor K+ at baseline, 1 wk, monthly",
+        "category": "hyperkalemia",
+        "detail": "Dual RAAS blockade + K-sparing diuretic significantly raises hyperkalemia risk. Current K+ is 5.1 mEq/L. CKD (eGFR 44) compounds the risk. RSSDI+CSI: hold spironolactone if K+ >5.5. Adding SGLT2i mitigates risk.",
+        "drugs_involved": [
+          "Ramipril",
+          "Spironolactone"
+        ],
+        "guideline_source": "RSSDI+CSI 2022",
+        "severity": "critical",
+        "title": "Hyperkalemia risk: Ramipril + Spironolactone"
+      },
+      {
+        "action": "REDUCE / CAUTION",
+        "category": "renal",
+        "detail": "Patient eGFR 44 → reduce 50%",
+        "drugs_involved": [
+          "Metformin"
+        ],
+        "severity": "warning",
+        "title": "Metformin: REDUCE / CAUTION (eGFR 44)"
+      },
+      {
+        "action": "REDUCE / CAUTION",
+        "category": "renal",
+        "detail": "Patient eGFR 44 → reduce, caution",
+        "drugs_involved": [
+          "Glimepiride"
+        ],
+        "severity": "warning",
+        "title": "Glimepiride: REDUCE / CAUTION (eGFR 44)"
+      },
+      {
+        "action": "Avoid alcohol. If consumed, eat carbs, monitor glucose.",
+        "category": "interaction",
+        "detail": "Severe hypoglycemia, disulfiram-like reaction. Mechanism: Additive hypoglycemic effect; alcohol impairs gluconeogenesis.",
+        "drugs_involved": [
+          "Glimepiride",
+          "Alcohol"
+        ],
+        "severity": "warning",
+        "title": "Glimepiride + Alcohol: SEVERE"
+      },
+      {
+        "action": "Hold metformin 48h before and after IV contrast if eGFR <60.",
+        "category": "interaction",
+        "detail": "Lactic acidosis. Mechanism: Risk of contrast-induced AKI → metformin accumulation → lactic acidosis.",
+        "drugs_involved": [
+          "Metformin",
+          "IV contrast dye"
+        ],
+        "severity": "warning",
+        "title": "Metformin + IV contrast dye: SEVERE"
+      },
+      {
+        "action": "Monitor K+ at baseline, 1 week, then monthly. Hold if K+ >5.5.",
+        "category": "interaction",
+        "detail": "HYPERKALEMIA (can be fatal). Mechanism: Dual RAAS blockade + K-sparing diuretic.",
+        "drugs_involved": [
+          "Spironolactone",
+          "Ramipril"
+        ],
+        "severity": "warning",
+        "title": "Spironolactone + Ramipril: SEVERE"
+      },
+      {
+        "action": "Avoid or hold statin during macrolide course. Use azithromycin instead.",
+        "category": "interaction",
+        "detail": "Myopathy, rhabdomyolysis. Mechanism: CYP3A4 inhibition → increased statin levels.",
+        "drugs_involved": [
+          "Atorvastatin",
+          "Erythromycin / Clarithromycin"
+        ],
+        "severity": "warning",
+        "title": "Atorvastatin + Erythromycin / Clarithromycin: SEVERE"
+      },
+      {
+        "action": "MONITOR",
+        "category": "renal",
+        "detail": "Patient eGFR 44 → use, monitor K+",
+        "drugs_involved": [
+          "Spironolactone"
+        ],
+        "severity": "caution",
+        "title": "Spironolactone: MONITOR (eGFR 44)"
+      },
+      {
+        "action": "Patient education + SMBG",
+        "category": "hypoglycemia",
+        "detail": "Beta blockers mask the adrenergic symptoms of hypoglycemia (tachycardia, tremor). Patient must use SMBG and recognise non-adrenergic symptoms (sweating, confusion).",
+        "drugs_involved": [
+          "Glimepiride",
+          "Carvedilol"
+        ],
+        "severity": "caution",
+        "title": "Glimepiride + Carvedilol: hypoglycemia unawareness"
+      },
+      {
+        "action": "Educate patient. SMBG essential.",
+        "category": "interaction",
+        "detail": "Hypoglycemia unawareness. Mechanism: Beta blockade masks hypoglycemia.",
+        "drugs_involved": [
+          "Glimepiride",
+          "Carvedilol"
+        ],
+        "severity": "caution",
+        "title": "Glimepiride + Carvedilol: MODERATE"
+      },
+      {
+        "action": "Limit alcohol. Avoid binge drinking. Patient education.",
+        "category": "interaction",
+        "detail": "Lactic acidosis, hypoglycemia. Mechanism: Increased lactic acidosis risk; impairs gluconeogenesis.",
+        "drugs_involved": [
+          "Metformin",
+          "Alcohol"
+        ],
+        "severity": "caution",
+        "title": "Metformin + Alcohol: MODERATE"
+      },
+      {
+        "action": "Increase antidiabetic doses during steroid course. Monitor glucose.",
+        "category": "interaction",
+        "detail": "Loss of glycemic control. Mechanism: Steroids cause hyperglycemia.",
+        "drugs_involved": [
+          "Metformin",
+          "Prednisolone / Steroids"
+        ],
+        "severity": "caution",
+        "title": "Metformin + Prednisolone / Steroids: MODERATE"
+      },
+      {
+        "action": "Monitor K+ and renal function. Hold metformin if dehydrated.",
+        "category": "interaction",
+        "detail": "Hyperkalemia, AKI risk in dehydration. Mechanism: Minor risk of hypoglycemia + lactic acidosis if AKI develops.",
+        "drugs_involved": [
+          "Metformin",
+          "Ramipril"
+        ],
+        "severity": "info",
+        "title": "Metformin + Ramipril: MINOR"
+      },
+      {
+        "action": "ADD SGLT2i",
+        "category": "recommendation",
+        "detail": "Empagliflozin (EMPEROR-Reduced) or Dapagliflozin (DAPA-HF) provides dual benefit: glycemia + HF outcomes. RSSDI+CSI 2022 recommend regardless of HbA1c if T2DM + HFrEF.",
+        "guideline_source": "RSSDI+CSI 2022",
+        "severity": "info",
+        "title": "First-line: SGLT2 inhibitor for diabetes + HF"
+      },
+      {
+        "action": "Consider adding SGLT2i",
+        "category": "recommendation",
+        "detail": "Dapagliflozin (DAPA-CKD) provides renoprotection at eGFR ≥25. ACEi/ARB mandatory if albuminuria.",
+        "guideline_source": "RSSDI 2022",
+        "severity": "info",
+        "title": "Consider SGLT2 inhibitor for diabetic kidney disease"
+      }
+    ],
+    "patient_id": 6,
+    "recommended_drug_classes": [
+      "SGLT2 inhibitor",
+      "SGLT2 inhibitor"
+    ]
+  }
+}

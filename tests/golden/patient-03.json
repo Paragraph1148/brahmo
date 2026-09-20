@@ -1,0 +1,56 @@
+{
+  "patient": {
+    "age": 34,
+    "allergies": [
+      "NKDA"
+    ],
+    "bmi": 35.3,
+    "conditions": [
+      "T2DM (2mo, newly diagnosed)",
+      "Obesity",
+      "NAFLD"
+    ],
+    "created_at": {},
+    "id": 3,
+    "income_context": "Auto-rickshaw driver, daily wage ₹800-1000",
+    "insurance": {
+      "notes": "No insurance",
+      "provider": "NONE"
+    },
+    "labs": {
+      "ALT": 68,
+      "Cr": 0.8,
+      "FBS": 186,
+      "HDL": 32,
+      "HbA1c": 8.8,
+      "TG": 320,
+      "eGFR": 108
+    },
+    "medications": [
+      {
+        "dose": "500mg BD (just started)",
+        "drug": "Metformin"
+      }
+    ],
+    "patient_label": "Auto-Driver",
+    "sex": "M",
+    "vitals": {
+      "BP": null,
+      "HR": null
+    }
+  },
+  "question": "Newly diagnosed T2DM. He's an auto-driver, no insurance, daily wage ₹800. What regimen?",
+  "origin": "seed",
+  "report": {
+    "computed": {
+      "bmi_category": "Obese II (Asian)",
+      "chads_vasc": null,
+      "eGFR": 119,
+      "eGFR_stage": "Normal (G1)"
+    },
+    "drugs_to_avoid": [],
+    "flags": [],
+    "patient_id": 3,
+    "recommended_drug_classes": []
+  }
+}

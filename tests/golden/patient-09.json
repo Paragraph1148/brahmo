@@ -1,0 +1,69 @@
+{
+  "patient": {
+    "age": 60,
+    "allergies": [
+      "Aspirin (mild rash, no anaphylaxis)"
+    ],
+    "bmi": 29.1,
+    "conditions": [
+      "Chest pain (acute, 4 hours)",
+      "Hyperglycemia (newly detected)",
+      "Hypertension (newly diagnosed)"
+    ],
+    "id": 9,
+    "income_context": "Daily wage construction worker, ₹600/day, no insurance, lives in slum",
+    "insurance": {
+      "notes": "",
+      "provider": ""
+    },
+    "labs": {
+      "Cr": 1.1,
+      "ECG": "Inferior ST elevation 2mm in II, III, aVF; reciprocal in I, aVL",
+      "Glucose": 340,
+      "HbA1c": 9.8,
+      "K": 3.9,
+      "Na": 134,
+      "Troponin": 0.18
+    },
+    "medications": [],
+    "patient_label": "Cold Case — Chest Pain + Hyperglycemia",
+    "sex": "M",
+    "vitals": {
+      "BP": "168/98",
+      "HR": 96,
+      "RR": 22,
+      "SpO2": 95
+    }
+  },
+  "question": "60M just walked into ED. Chest pain 4 hours, inferior ST elevation on ECG, troponin 0.18 ng/mL. Random glucose 340, HbA1c 9.8. BP 168/98. Aspirin allergy (rash only, no anaphylaxis). What's the immediate STEMI protocol AND what do I do about his blood sugar right now? He's uninsured, ₹600/day wage.",
+  "origin": "surprise",
+  "report": {
+    "computed": {
+      "bmi_category": "Obese I (Asian)",
+      "chads_vasc": null,
+      "eGFR": 77,
+      "eGFR_stage": "G2"
+    },
+    "drugs_to_avoid": [
+      {
+        "drug": "Aspirin",
+        "reason": "Aspirin/NSAID allergy on file — confirm reaction before use"
+      }
+    ],
+    "flags": [
+      {
+        "action": "Confirm reaction history before aspirin loading",
+        "category": "allergy",
+        "detail": "Documented reaction: Aspirin (mild rash, no anaphylaxis). A mild cutaneous reaction is not an absolute contraindication — confirm the reaction history before loading aspirin. If aspirin is withheld, Clopidogrel (Plavix, NLEM) is the substitute P2Y12 loading agent.",
+        "drugs_involved": [
+          "Aspirin"
+        ],
+        "guideline_source": "CSI 2017",
+        "severity": "warning",
+        "title": "Aspirin/NSAID allergy on file — review before antiplatelet loading"
+      }
+    ],
+    "patient_id": 9,
+    "recommended_drug_classes": []
+  }
+}

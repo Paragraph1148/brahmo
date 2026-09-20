@@ -1,0 +1,109 @@
+{
+  "patient": {
+    "age": 48,
+    "allergies": [
+      "Sulfonamide (rash)"
+    ],
+    "bmi": 31.1,
+    "conditions": [
+      "T2DM (3yr)",
+      "HTN (1yr)"
+    ],
+    "created_at": {},
+    "id": 1,
+    "income_context": "Middle-class salaried",
+    "insurance": {
+      "notes": "Generic covered, branded need pre-auth, ₹5K/month cap",
+      "provider": "Star Health Gold"
+    },
+    "labs": {
+      "Cr": 0.9,
+      "FBS": 168,
+      "HDL": 38,
+      "HbA1c": 8.4,
+      "LDL": 142,
+      "TC": 220,
+      "TG": 280,
+      "eGFR": 92
+    },
+    "medications": [
+      {
+        "dose": "1g BD",
+        "drug": "Metformin"
+      },
+      {
+        "dose": "40mg OD",
+        "drug": "Telmisartan"
+      }
+    ],
+    "patient_label": "Failing Metformin",
+    "sex": "M",
+    "vitals": {
+      "BP": "134/86",
+      "HR": 78
+    }
+  },
+  "question": "HbA1c is 8.4% on Metformin 2g/day. What second-line agent should I add given his ₹5K/month insurance cap?",
+  "origin": "seed",
+  "report": {
+    "computed": {
+      "bmi_category": "Obese II (Asian)",
+      "chads_vasc": null,
+      "eGFR": 105,
+      "eGFR_stage": "Normal (G1)"
+    },
+    "drugs_to_avoid": [
+      {
+        "drug": "Sulfonylureas",
+        "reason": "Potential sulfonamide cross-reactivity"
+      }
+    ],
+    "flags": [
+      {
+        "action": "Hold metformin 48h before and after IV contrast if eGFR <60.",
+        "category": "interaction",
+        "detail": "Lactic acidosis. Mechanism: Risk of contrast-induced AKI → metformin accumulation → lactic acidosis.",
+        "drugs_involved": [
+          "Metformin",
+          "IV contrast dye"
+        ],
+        "severity": "warning",
+        "title": "Metformin + IV contrast dye: SEVERE"
+      },
+      {
+        "action": "MONITOR",
+        "category": "renal",
+        "detail": "Patient eGFR 105 → use, monitor K+",
+        "drugs_involved": [
+          "Telmisartan"
+        ],
+        "severity": "caution",
+        "title": "Telmisartan: MONITOR (eGFR 105)"
+      },
+      {
+        "action": "Limit alcohol. Avoid binge drinking. Patient education.",
+        "category": "interaction",
+        "detail": "Lactic acidosis, hypoglycemia. Mechanism: Increased lactic acidosis risk; impairs gluconeogenesis.",
+        "drugs_involved": [
+          "Metformin",
+          "Alcohol"
+        ],
+        "severity": "caution",
+        "title": "Metformin + Alcohol: MODERATE"
+      },
+      {
+        "action": "Increase antidiabetic doses during steroid course. Monitor glucose.",
+        "category": "interaction",
+        "detail": "Loss of glycemic control. Mechanism: Steroids cause hyperglycemia.",
+        "drugs_involved": [
+          "Metformin",
+          "Prednisolone / Steroids"
+        ],
+        "severity": "caution",
+        "title": "Metformin + Prednisolone / Steroids: MODERATE"
+      }
+    ],
+    "patient_id": 1,
+    "recommended_drug_classes": []
+  }
+}

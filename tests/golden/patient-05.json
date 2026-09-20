@@ -1,0 +1,196 @@
+{
+  "patient": {
+    "age": 66,
+    "allergies": [
+      "NKDA"
+    ],
+    "bmi": 28.4,
+    "conditions": [
+      "Anterior MI (3mo ago, DES to LAD)",
+      "T2DM",
+      "HTN",
+      "Newly detected AF"
+    ],
+    "created_at": {},
+    "id": 5,
+    "income_context": "Retired government employee",
+    "insurance": {
+      "notes": "Covers most drugs",
+      "provider": "CGHS"
+    },
+    "labs": {
+      "Cr": 1.1,
+      "HbA1c": 7.4,
+      "K": 4.4,
+      "eGFR": 68
+    },
+    "medications": [
+      {
+        "dose": "75mg",
+        "drug": "Aspirin"
+      },
+      {
+        "dose": "90mg BD",
+        "drug": "Ticagrelor"
+      },
+      {
+        "dose": "80mg",
+        "drug": "Atorvastatin"
+      },
+      {
+        "dose": "5mg",
+        "drug": "Ramipril"
+      },
+      {
+        "dose": "25mg BD",
+        "drug": "Metoprolol"
+      },
+      {
+        "dose": "1g BD",
+        "drug": "Metformin"
+      }
+    ],
+    "patient_label": "Post-MI + New AF",
+    "sex": "M",
+    "vitals": {
+      "BP": "128/78",
+      "HR": "88 (irregularly irregular)"
+    }
+  },
+  "question": "Post-MI on DAPT, now new AF. CHA₂DS₂-VASc is 3 (male threshold = ≥2). How do I manage triple therapy?",
+  "origin": "seed",
+  "report": {
+    "computed": {
+      "bmi_category": "Obese I (Asian)",
+      "chads_vasc": 4,
+      "eGFR": 74,
+      "eGFR_stage": "G2"
+    },
+    "drugs_to_avoid": [],
+    "flags": [
+      {
+        "action": "Hold metformin 48h before and after IV contrast if eGFR <60.",
+        "category": "interaction",
+        "detail": "Lactic acidosis. Mechanism: Risk of contrast-induced AKI → metformin accumulation → lactic acidosis.",
+        "drugs_involved": [
+          "Metformin",
+          "IV contrast dye"
+        ],
+        "severity": "warning",
+        "title": "Metformin + IV contrast dye: SEVERE"
+      },
+      {
+        "action": "Avoid or hold statin during macrolide course. Use azithromycin instead.",
+        "category": "interaction",
+        "detail": "Myopathy, rhabdomyolysis. Mechanism: CYP3A4 inhibition → increased statin levels.",
+        "drugs_involved": [
+          "Atorvastatin",
+          "Erythromycin / Clarithromycin"
+        ],
+        "severity": "warning",
+        "title": "Atorvastatin + Erythromycin / Clarithromycin: SEVERE"
+      },
+      {
+        "category": "recommendation",
+        "detail": "Threshold met (≥2 for men). Recommend OAC unless contraindicated.",
+        "guideline_source": "IHRS/CSI 2018",
+        "severity": "warning",
+        "title": "CHA₂DS₂-VASc = 4 → Anticoagulation INDICATED"
+      },
+      {
+        "action": "MONITOR",
+        "category": "renal",
+        "detail": "Patient eGFR 74 → use, monitor GI",
+        "drugs_involved": [
+          "Aspirin"
+        ],
+        "severity": "caution",
+        "title": "Aspirin: MONITOR (eGFR 74)"
+      },
+      {
+        "action": "Standard ACS therapy. PPI if GI risk. Monitor Hb.",
+        "category": "interaction",
+        "detail": "Bleeding (GI, intracranial). Mechanism: Standard DAPT - intended combination but bleeding risk.",
+        "drugs_involved": [
+          "Aspirin",
+          "Ticagrelor"
+        ],
+        "severity": "caution",
+        "title": "Aspirin + Ticagrelor: MODERATE"
+      },
+      {
+        "action": "Limit alcohol. Avoid binge drinking. Patient education.",
+        "category": "interaction",
+        "detail": "Lactic acidosis, hypoglycemia. Mechanism: Increased lactic acidosis risk; impairs gluconeogenesis.",
+        "drugs_involved": [
+          "Metformin",
+          "Alcohol"
+        ],
+        "severity": "caution",
+        "title": "Metformin + Alcohol: MODERATE"
+      },
+      {
+        "action": "Avoid concurrent use. If NSAID needed, take aspirin 2h before NSAID.",
+        "category": "interaction",
+        "detail": "Reduced cardioprotection + dual GI bleeding risk. Mechanism: NSAID blocks aspirin's antiplatelet effect (competitive COX-1 binding).",
+        "drugs_involved": [
+          "Aspirin",
+          "Ibuprofen / Diclofenac (NSAIDs)"
+        ],
+        "severity": "caution",
+        "title": "Aspirin + Ibuprofen / Diclofenac (NSAIDs): MODERATE"
+      },
+      {
+        "action": "Increase antidiabetic doses during steroid course. Monitor glucose.",
+        "category": "interaction",
+        "detail": "Loss of glycemic control. Mechanism: Steroids cause hyperglycemia.",
+        "drugs_involved": [
+          "Metformin",
+          "Prednisolone / Steroids"
+        ],
+        "severity": "caution",
+        "title": "Metformin + Prednisolone / Steroids: MODERATE"
+      },
+      {
+        "action": "Limit alcohol. Use PPI if needed.",
+        "category": "interaction",
+        "detail": "GI bleeding risk. Mechanism: Both irritate gastric mucosa.",
+        "drugs_involved": [
+          "Aspirin",
+          "Alcohol"
+        ],
+        "severity": "caution",
+        "title": "Aspirin + Alcohol: MODERATE"
+      },
+      {
+        "action": "Monitor K+ and renal function. Hold metformin if dehydrated.",
+        "category": "interaction",
+        "detail": "Hyperkalemia, AKI risk in dehydration. Mechanism: Minor risk of hypoglycemia + lactic acidosis if AKI develops.",
+        "drugs_involved": [
+          "Metformin",
+          "Ramipril"
+        ],
+        "severity": "info",
+        "title": "Metformin + Ramipril: MINOR"
+      },
+      {
+        "category": "recommendation",
+        "detail": "RSSDI 2022 recommends relaxed glycemic target in elderly with comorbidities to minimize hypoglycemia risk. Prefer DPP4i over sulfonylureas.",
+        "guideline_source": "RSSDI 2022",
+        "severity": "info",
+        "title": "Elderly diabetic: relaxed HbA1c target 7.5-8%"
+      },
+      {
+        "category": "recommendation",
+        "detail": "IHRS/CSI 2018: Apixaban / Rivaroxaban / Dabigatran preferred. Apixaban has lowest bleeding risk.",
+        "guideline_source": "IHRS/CSI 2018",
+        "severity": "info",
+        "title": "Non-valvular AF: DOAC preferred over Warfarin"
+      }
+    ],
+    "patient_id": 5,
+    "recommended_drug_classes": [
+      "DOAC"
+    ]
+  }
+}

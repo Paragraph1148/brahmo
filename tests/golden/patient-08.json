@@ -1,0 +1,105 @@
+{
+  "patient": {
+    "age": 28,
+    "allergies": [
+      "NKDA"
+    ],
+    "bmi": 27.5,
+    "conditions": [
+      "T2DM (3yr, pre-existing)",
+      "Pregnancy (12 weeks, first trimester)"
+    ],
+    "id": 8,
+    "income_context": "Middle class, IT employee on maternity benefits",
+    "insurance": {
+      "notes": "Maternity coverage active",
+      "provider": "Star Health"
+    },
+    "labs": {
+      "Cr": 0.6,
+      "FBS": 132,
+      "HbA1c": 7.4,
+      "K": 4,
+      "Na": 139,
+      "TSH": 2.1,
+      "UrineACR": 18,
+      "eGFR": 110
+    },
+    "medications": [
+      {
+        "dose": "500mg BD",
+        "drug": "Metformin"
+      },
+      {
+        "dose": "2mg OD",
+        "drug": "Glimepiride"
+      }
+    ],
+    "patient_label": "Pregnant + Pre-existing T2DM",
+    "sex": "F",
+    "vitals": {
+      "BP": "122/78",
+      "HR": 84,
+      "SpO2": 99
+    }
+  },
+  "question": "28F, 12 weeks pregnant, has T2DM 3 years on Metformin + Glimepiride. HbA1c 7.4%. How do I manage her diabetes safely in pregnancy? What stops, what continues, and what's the target?",
+  "origin": "surprise",
+  "report": {
+    "computed": {
+      "bmi_category": "Obese I (Asian)",
+      "chads_vasc": null,
+      "eGFR": 125,
+      "eGFR_stage": "Normal (G1)"
+    },
+    "drugs_to_avoid": [],
+    "flags": [
+      {
+        "action": "Avoid alcohol. If consumed, eat carbs, monitor glucose.",
+        "category": "interaction",
+        "detail": "Severe hypoglycemia, disulfiram-like reaction. Mechanism: Additive hypoglycemic effect; alcohol impairs gluconeogenesis.",
+        "drugs_involved": [
+          "Glimepiride",
+          "Alcohol"
+        ],
+        "severity": "warning",
+        "title": "Glimepiride + Alcohol: SEVERE"
+      },
+      {
+        "action": "Hold metformin 48h before and after IV contrast if eGFR <60.",
+        "category": "interaction",
+        "detail": "Lactic acidosis. Mechanism: Risk of contrast-induced AKI → metformin accumulation → lactic acidosis.",
+        "drugs_involved": [
+          "Metformin",
+          "IV contrast dye"
+        ],
+        "severity": "warning",
+        "title": "Metformin + IV contrast dye: SEVERE"
+      },
+      {
+        "action": "Limit alcohol. Avoid binge drinking. Patient education.",
+        "category": "interaction",
+        "detail": "Lactic acidosis, hypoglycemia. Mechanism: Increased lactic acidosis risk; impairs gluconeogenesis.",
+        "drugs_involved": [
+          "Metformin",
+          "Alcohol"
+        ],
+        "severity": "caution",
+        "title": "Metformin + Alcohol: MODERATE"
+      },
+      {
+        "action": "Increase antidiabetic doses during steroid course. Monitor glucose.",
+        "category": "interaction",
+        "detail": "Loss of glycemic control. Mechanism: Steroids cause hyperglycemia.",
+        "drugs_involved": [
+          "Metformin",
+          "Prednisolone / Steroids"
+        ],
+        "severity": "caution",
+        "title": "Metformin + Prednisolone / Steroids: MODERATE"
+      }
+    ],
+    "patient_id": 8,
+    "recommended_drug_classes": []
+  }
+}

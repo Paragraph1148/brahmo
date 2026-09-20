@@ -1,0 +1,79 @@
+{
+  "patient": {
+    "age": 45,
+    "allergies": [
+      "NKDA"
+    ],
+    "bmi": 24.8,
+    "conditions": [
+      "Rheumatic Heart Disease",
+      "Mitral Stenosis (moderate)",
+      "Atrial Fibrillation (new)",
+      "T2DM (newly diagnosed)"
+    ],
+    "id": 7,
+    "income_context": "Lower middle class, school teacher, ₹25K/month",
+    "insurance": {
+      "notes": "Government scheme, generic preferred",
+      "provider": "CGHS"
+    },
+    "labs": {
+      "Cr": 0.9,
+      "FBS": 156,
+      "Hb": 11.2,
+      "HbA1c": 7.8,
+      "INR": 1.1,
+      "K": 4.2,
+      "Na": 138
+    },
+    "medications": [
+      {
+        "dose": "20mg OD",
+        "drug": "Furosemide"
+      },
+      {
+        "dose": "250mg BD (RHD prophylaxis)",
+        "drug": "Penicillin V"
+      }
+    ],
+    "patient_label": "RHD + AF + New T2DM",
+    "sex": "F",
+    "vitals": {
+      "BP": "118/76",
+      "HR": 118,
+      "RR": 18,
+      "SpO2": 96
+    }
+  },
+  "question": "Newly detected AF in a patient with rheumatic mitral stenosis. CHA2DS2-VASc is 3 (HTN absent, female, T2DM, age 45). Plus she just tested T2DM. What's my anticoagulation choice and how do I start diabetes management given she's on lifelong penicillin prophylaxis?",
+  "origin": "surprise",
+  "report": {
+    "computed": {
+      "bmi_category": "Overweight (Asian)",
+      "chads_vasc": 2,
+      "eGFR": 80,
+      "eGFR_stage": "G2"
+    },
+    "drugs_to_avoid": [],
+    "flags": [
+      {
+        "category": "recommendation",
+        "detail": "CHA₂DS₂-VASc was derived and validated in NON-valvular AF and does not govern this decision. AF with rheumatic mitral stenosis or a prosthetic valve is an anticoagulation indication in its own right — the score is shown for completeness only. Warfarin, INR 2-3.",
+        "guideline_source": "IHRS/CSI 2018",
+        "severity": "warning",
+        "title": "Valvular AF → Anticoagulation INDICATED regardless of CHA₂DS₂-VASc (score 2)"
+      },
+      {
+        "category": "recommendation",
+        "detail": "RHD is common in India (rare in West). DOACs are contraindicated in rheumatic mitral stenosis. INR target 2-3.",
+        "guideline_source": "IHRS/CSI 2018",
+        "severity": "warning",
+        "title": "Valvular/Rheumatic AF: Warfarin ONLY (DOACs contraindicated)"
+      }
+    ],
+    "patient_id": 7,
+    "recommended_drug_classes": [
+      "Warfarin (RHD/valvular AF)"
+    ]
+  }
+}
