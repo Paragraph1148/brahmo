@@ -13,7 +13,8 @@
     "audit:tags": "tsx tests/tag-agreement.mts",
     "inspect": "tsx tests/inspect.mts",
     "golden": "tsx tests/golden.mts",
-    "bridge": "tsx tests/bridge.mts"
+    "bridge": "tsx tests/bridge.mts",
+    "fixtures": "tsx tests/export-fixtures.mts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",

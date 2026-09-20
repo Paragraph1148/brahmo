@@ -1,0 +1,1158 @@
+[
+  {
+    "id": 1,
+    "generic_name": "Metformin",
+    "generic_name_normalized": "metformin",
+    "drug_class": "Biguanide",
+    "drug_subclass": null,
+    "indian_brand_name": "Glyciphage SR",
+    "manufacturer": "Franco-Indian Pharmaceuticals Private Ltd",
+    "mrp_price": "26.62/strip of 10 (500mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_30_45": "reduce 50%",
+      "egfr_45_plus": "full dose",
+      "egfr_below_30": "STOP"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/glyciphage-sr-500mg-tablet-149311",
+    "notes": "First-line. NLEM. Hold 48h pre/post contrast. B12 deficiency on prolonged use.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 2,
+    "generic_name": "Glimepiride",
+    "generic_name_normalized": "glimepiride",
+    "drug_class": "Sulfonylurea",
+    "drug_subclass": "2nd-gen SU",
+    "indian_brand_name": "Amaryl",
+    "manufacturer": "Sanofi India Ltd",
+    "mrp_price": "₹115/strip of 10 (1mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_30_60": "reduce, caution",
+      "egfr_60_plus": "full dose",
+      "egfr_below_30": "STOP - hypoglycemia"
+    },
+    "hf_safe": true,
+    "weight_effect": "gain",
+    "hypoglycemia_risk": "high",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/amaryl-1mg-tablet-12155",
+    "notes": "Hypoglycemia risk HIGH in elderly, CKD, beta-blockers (masks symptoms).",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 3,
+    "generic_name": "Gliclazide",
+    "generic_name_normalized": "gliclazide",
+    "drug_class": "Sulfonylurea",
+    "drug_subclass": "2nd-gen SU",
+    "indian_brand_name": "Glizid MR",
+    "manufacturer": "Mankind Pharma Ltd",
+    "mrp_price": "₹71.2/strip of 10 (30mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_30_plus": "use cautiously",
+      "egfr_below_30": "avoid"
+    },
+    "hf_safe": false,
+    "weight_effect": "gain",
+    "hypoglycemia_risk": "moderate",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/glizid-mr-30-tablet-11796",
+    "notes": "Preferred SU in India - lower hypoglycemia vs glimepiride.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 4,
+    "generic_name": "Glibenclamide",
+    "generic_name_normalized": "glibenclamide",
+    "drug_class": "Sulfonylurea",
+    "drug_subclass": "1st-gen SU",
+    "indian_brand_name": "Daonil",
+    "manufacturer": "Sanofi India Ltd",
+    "mrp_price": "₹58.9/strip of 30 (5mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_60_plus": "use cautiously",
+      "egfr_below_60": "STOP"
+    },
+    "hf_safe": false,
+    "weight_effect": "gain",
+    "hypoglycemia_risk": "high",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/daonil-tablet-333076",
+    "notes": "Older SU. Avoid in elderly and CKD. Highest hypoglycemia risk.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 5,
+    "generic_name": "Teneligliptin",
+    "generic_name_normalized": "teneligliptin",
+    "drug_class": "DPP4 inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "Dynaglipt Tablet",
+    "manufacturer": "Mankind Pharma Ltd",
+    "mrp_price": "₹84.8/strip of 10 (20mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_all": "no dose adjustment"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/dynaglipt-tablet-323687",
+    "notes": "INDIA's #1 DPP4i. Very rare in US/UK. Affordable (~₹6-8/tablet). Renal-safe.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 6,
+    "generic_name": "Sitagliptin",
+    "generic_name_normalized": "sitagliptin",
+    "drug_class": "DPP4 inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "Sitasys",
+    "manufacturer": "Systopic Laboratories Pvt Ltd",
+    "mrp_price": "₹74.6/strip of 10 (100mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_30_45": "50mg",
+      "egfr_45_plus": "100mg",
+      "egfr_below_30": "25mg"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/sitasys-100mg-tablet-857560",
+    "notes": "Renal dose adjustment needed. Generally well tolerated.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 7,
+    "generic_name": "Vildagliptin",
+    "generic_name_normalized": "vildagliptin",
+    "drug_class": "DPP4 inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "Glyday",
+    "manufacturer": "Elsker lifescience Pvt. Ltd.",
+    "mrp_price": "₹103/strip of 10 (50mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_50_plus": "50mg BD",
+      "egfr_below_50": "50mg OD"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/glyday-50-tablet-575621",
+    "notes": "Monitor LFTs. Avoid in liver disease.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 8,
+    "generic_name": "Linagliptin",
+    "generic_name_normalized": "linagliptin",
+    "drug_class": "DPP4 inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "L Glip",
+    "manufacturer": "Unison Pharmaceuticals Pvt Ltd",
+    "mrp_price": "₹25.3/strip of 10 (5mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_all": "no dose adjustment - hepatic clearance"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/l-glip-5mg-tablet-1003435",
+    "notes": "BEST choice in advanced CKD - no renal dose adjustment needed.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 9,
+    "generic_name": "Saxagliptin",
+    "generic_name_normalized": "saxagliptin",
+    "drug_class": "DPP4 inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "Zaxaglit",
+    "manufacturer": "Chemo Healthcare Pvt Ltd",
+    "mrp_price": "₹365/strip of 10 (2.5mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_45_plus": "5mg",
+      "egfr_below_45": "2.5mg"
+    },
+    "hf_safe": false,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/zaxaglit-2.5mg-tablet-668606",
+    "notes": "CONTRAINDICATED in HF (FDA black box - SAVOR-TIMI). Increased HF hospitalization.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 10,
+    "generic_name": "Empagliflozin",
+    "generic_name_normalized": "empagliflozin",
+    "drug_class": "SGLT2 inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "Gibtulio",
+    "manufacturer": "Lupin Ltd",
+    "mrp_price": "₹117/strip of 10 (10mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_30_45": "10mg if started, do not initiate",
+      "egfr_45_plus": "10-25mg",
+      "egfr_below_30": "STOP"
+    },
+    "hf_safe": true,
+    "weight_effect": "loss",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes",
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/gibtulio-10mg-tablet-336789",
+    "notes": "EMPEROR-Reduced: HF benefit. EMPA-REG OUTCOME: CV benefit. Genital infections, DKA risk.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 11,
+    "generic_name": "Dapagliflozin",
+    "generic_name_normalized": "dapagliflozin",
+    "drug_class": "SGLT2 inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "Oxra",
+    "manufacturer": "Sun Pharmaceutical Industries Ltd",
+    "mrp_price": "₹162/strip of 14 (5mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_25_plus": "10mg",
+      "egfr_below_25": "STOP for glycemic; continue for HF if stable"
+    },
+    "hf_safe": true,
+    "weight_effect": "loss",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes",
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/oxra-5mg-tablet-333999",
+    "notes": "DAPA-HF trial: HFrEF benefit even without diabetes. First-line in HF + T2DM.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 12,
+    "generic_name": "Canagliflozin",
+    "generic_name_normalized": "canagliflozin",
+    "drug_class": "SGLT2 inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "Canagliflowin",
+    "manufacturer": "Prevego Healthcare & Research Private Limited",
+    "mrp_price": "₹306.63/strip of 10 (100mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_30_60": "100mg",
+      "egfr_60_plus": "100-300mg",
+      "egfr_below_30": "STOP"
+    },
+    "hf_safe": true,
+    "weight_effect": "loss",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes",
+      "cardiovascular"
+    ],
+    "source_url": "https://www.netmeds.com/product/canagliflowin-100-tablet-10s-mb6p76-10893979",
+    "notes": "CANVAS: increased lower extremity amputation risk. Less commonly used in India now.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 13,
+    "generic_name": "Pioglitazone",
+    "generic_name_normalized": "pioglitazone",
+    "drug_class": "Thiazolidinedione",
+    "drug_subclass": null,
+    "indian_brand_name": "piONORM",
+    "manufacturer": "Micro Labs Ltd",
+    "mrp_price": "₹54.3/strip of 10 (15mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_all": "no dose adjustment"
+    },
+    "hf_safe": false,
+    "weight_effect": "gain",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/pionorm-15-tablet-27703",
+    "notes": "CONTRAINDICATED in HF (fluid retention). Beneficial in NAFLD. Bladder cancer risk caution.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 14,
+    "generic_name": "Insulin Glargine",
+    "generic_name_normalized": "insulin_glargine",
+    "drug_class": "Insulin",
+    "drug_subclass": "Long-acting analog",
+    "indian_brand_name": "Basalog",
+    "manufacturer": "Biocon",
+    "mrp_price": "₹542/cartridge (3ml)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_all": "dose-adjust per glucose"
+    },
+    "hf_safe": true,
+    "weight_effect": "gain",
+    "hypoglycemia_risk": "high",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/basalog-refill-solution-for-injection-164232",
+    "notes": "Once-daily basal. Basalog (Biocon biosimilar) much cheaper than Lantus.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 15,
+    "generic_name": "Insulin Human 30/70 (Premixed)",
+    "generic_name_normalized": "insulin_human_premix",
+    "drug_class": "Insulin",
+    "drug_subclass": "Premixed human",
+    "indian_brand_name": "Huminsulin 30/70",
+    "manufacturer": "Eli Lilly and Company India Pvt Ltd",
+    "mrp_price": "₹567/vial (10ml)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "dose-adjust per glucose"
+    },
+    "hf_safe": true,
+    "weight_effect": "gain",
+    "hypoglycemia_risk": "high",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/huminsulin-30-70-suspension-for-injection-100iu-ml-115297",
+    "notes": "NLEM. Cheapest insulin option. Twice-daily injection. Cloudy insulin.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 16,
+    "generic_name": "Insulin Regular (Human)",
+    "generic_name_normalized": "insulin_regular",
+    "drug_class": "Insulin",
+    "drug_subclass": "Short-acting human",
+    "indian_brand_name": "Huminsulin R",
+    "manufacturer": "Eli Lilly and Company India Pvt Ltd",
+    "mrp_price": "₹154/vial (10ml)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "dose-adjust per glucose"
+    },
+    "hf_safe": true,
+    "weight_effect": "gain",
+    "hypoglycemia_risk": "high",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/huminsulin-r-40iu-ml-solution-for-injection-14549",
+    "notes": "NLEM. Used in DKA management IV. Cheap.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 17,
+    "generic_name": "Liraglutide",
+    "generic_name_normalized": "liraglutide",
+    "drug_class": "GLP-1 RA",
+    "drug_subclass": "Daily injectable",
+    "indian_brand_name": "Gliptoza",
+    "manufacturer": "Eris Lifesciences Limited",
+    "mrp_price": "₹1691/pen (3ml)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_15_plus": "use cautiously",
+      "egfr_below_15": "avoid"
+    },
+    "hf_safe": true,
+    "weight_effect": "loss",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes",
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/gliptoza-pre-filled-pen-1084868",
+    "notes": "LEADER trial: CV benefit. Weight loss. Expensive in India (~₹6000-9000/month).",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 18,
+    "generic_name": "Dulaglutide",
+    "generic_name_normalized": "dulaglutide",
+    "drug_class": "GLP-1 RA",
+    "drug_subclass": "Weekly injectable",
+    "indian_brand_name": "Trulicity",
+    "manufacturer": "Eli Lilly and Company India Pvt Ltd",
+    "mrp_price": "₹4999/pen (0.75mg/0.5ml)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_15_plus": "no dose adjustment",
+      "egfr_below_15": "avoid"
+    },
+    "hf_safe": true,
+    "weight_effect": "loss",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes",
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/trulicity-0.75mg-pre-filled-pen-332260",
+    "notes": "REWIND: CV benefit. Once-weekly. Very expensive in India.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 19,
+    "generic_name": "Acarbose",
+    "generic_name_normalized": "acarbose",
+    "drug_class": "Alpha-glucosidase inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "Glucobay",
+    "manufacturer": "Bayer Zydus Pharma Pvt Ltd",
+    "mrp_price": "₹102/strip of 10 (25mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_25_plus": "use",
+      "egfr_below_25": "avoid"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/glucobay-25-tablet-40362",
+    "notes": "Targets postprandial glucose. GI side effects common.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 20,
+    "generic_name": "Metformin + Glimepiride FDC",
+    "generic_name_normalized": "metformin_glimepiride",
+    "drug_class": "FDC",
+    "drug_subclass": "Biguanide+SU",
+    "indian_brand_name": "Azulix",
+    "manufacturer": "Torrent Pharmaceuticals Ltd",
+    "mrp_price": "₹63.9/strip of 10 (0.5mg+500mg",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_60_plus": "use",
+      "egfr_below_60": "STOP - SU component unsafe"
+    },
+    "hf_safe": true,
+    "weight_effect": "gain",
+    "hypoglycemia_risk": "high",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/azulix-0.5-mf-tablet-pr-497053",
+    "notes": "Most common FDC in India. Glycomet-GP1 = 500mg+1mg, GP2 = 500mg+2mg.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 21,
+    "generic_name": "Metformin + Teneligliptin FDC",
+    "generic_name_normalized": "metformin_teneligliptin",
+    "drug_class": "FDC",
+    "drug_subclass": "Biguanide+DPP4i",
+    "indian_brand_name": "Dynaglipt-M",
+    "manufacturer": "Mankind Pharma Ltd",
+    "mrp_price": "₹149/strip of 10 (500mg+20mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_45_plus": "use",
+      "egfr_below_45": "stop metformin component"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/dynaglipt-m-tablet-sr-337936",
+    "notes": "Affordable DPP4i-based FDC. Common Indian prescribing.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 22,
+    "generic_name": "Metformin + Vildagliptin FDC",
+    "generic_name_normalized": "metformin_vildagliptin",
+    "drug_class": "FDC",
+    "drug_subclass": "Biguanide+DPP4i",
+    "indian_brand_name": "Ozovil-M",
+    "manufacturer": "Ozone Pharmaceuticals Ltd",
+    "mrp_price": "₹70.3/strip of 15 (500mg+50mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_50_plus": "use",
+      "egfr_below_50": "reduce or stop"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "low",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "source_url": "https://www.1mg.com/drugs/ozovil-m-tablet-641750",
+    "notes": "Most prescribed DPP4i-FDC globally.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 23,
+    "generic_name": "Aspirin",
+    "generic_name_normalized": "aspirin",
+    "drug_class": "Antiplatelet",
+    "drug_subclass": "COX-1 inhibitor",
+    "indian_brand_name": "Ecosprin",
+    "manufacturer": "USV Private Limited",
+    "mrp_price": "₹4.9/strip of 14 (75mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "use, monitor GI"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/ecosprin-75-tablet-40765",
+    "notes": "NLEM. ₹4-8/strip. Foundational ACS drug. Loading dose 162-325mg, maintenance 75mg.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 24,
+    "generic_name": "Clopidogrel",
+    "generic_name_normalized": "clopidogrel",
+    "drug_class": "Antiplatelet",
+    "drug_subclass": "P2Y12 inhibitor",
+    "indian_brand_name": "Plavix",
+    "manufacturer": "Sanofi",
+    "mrp_price": "₹94.8/strip of 14 (75mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "use, no dose adjustment"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/plavix-tablet-134976",
+    "notes": "NLEM. Loading 300-600mg. Maintenance 75mg. CYP2C19 variability.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 25,
+    "generic_name": "Ticagrelor",
+    "generic_name_normalized": "ticagrelor",
+    "drug_class": "Antiplatelet",
+    "drug_subclass": "P2Y12 inhibitor",
+    "indian_brand_name": "Axcer",
+    "manufacturer": "Sun Pharmaceutical Industries Ltd",
+    "mrp_price": "₹427/strip of 14 (60mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_all": "use, no dose adjustment"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/axcer-60mg-tablet-416014",
+    "notes": "PLATO trial: preferred over clopidogrel in ACS. Loading 180mg, then 90mg BD.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 26,
+    "generic_name": "Prasugrel",
+    "generic_name_normalized": "prasugrel",
+    "drug_class": "Antiplatelet",
+    "drug_subclass": "P2Y12 inhibitor",
+    "indian_brand_name": "Oresugrel",
+    "manufacturer": "Druto Laboratories",
+    "mrp_price": "₹98.4/strip of 10 (5mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_all": "use cautiously"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/oresugrel-5mg-tablet-593762",
+    "notes": "Avoid >75y, <60kg, prior stroke/TIA. Loading 60mg, maintenance 10mg.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 27,
+    "generic_name": "Heparin (UFH)",
+    "generic_name_normalized": "heparin",
+    "drug_class": "Anticoagulant",
+    "drug_subclass": "Unfractionated heparin",
+    "indian_brand_name": "Celhep 25000IU",
+    "manufacturer": "Celon Laboratories Ltd",
+    "mrp_price": "₹207/vial (5ml)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "use, monitor aPTT"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/celhep-25000iu-injection-720100",
+    "notes": "NLEM. IV bolus + infusion in ACS. Monitor aPTT 1.5-2.5x baseline.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 28,
+    "generic_name": "Enoxaparin",
+    "generic_name_normalized": "enoxaparin",
+    "drug_class": "Anticoagulant",
+    "drug_subclass": "LMWH",
+    "indian_brand_name": "Exhep",
+    "manufacturer": "Emcure Pharmaceuticals Ltd",
+    "mrp_price": "₹214/syringe (0.2ml)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_30_plus": "1mg/kg SC BD",
+      "egfr_below_30": "1mg/kg OD"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/exhep-20-injection-301822",
+    "notes": "Weight-based SC. Renal dose adjustment <30.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 29,
+    "generic_name": "Warfarin",
+    "generic_name_normalized": "warfarin",
+    "drug_class": "Anticoagulant",
+    "drug_subclass": "VKA",
+    "indian_brand_name": "Warf",
+    "manufacturer": "Cipla Ltd",
+    "mrp_price": "₹78.7/strip of 30 (1mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "use, monitor INR"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "atrial_fibrillation",
+      "rheumatic_heart_disease"
+    ],
+    "source_url": "https://www.1mg.com/drugs/warf-1-tablet-553037",
+    "notes": "NLEM. Cheap. INR 2-3 most indications, 2.5-3.5 mechanical valves. ONLY anticoagulant safe in valvular/rheumatic AF (DOACs contraindicated).",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 30,
+    "generic_name": "Rivaroxaban",
+    "generic_name_normalized": "rivaroxaban",
+    "drug_class": "Anticoagulant",
+    "drug_subclass": "DOAC - factor Xa",
+    "indian_brand_name": "Ordiban",
+    "manufacturer": "Cheminnova Life Sciences",
+    "mrp_price": "₹229/strip of 7 (10mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_15_50": "15mg OD",
+      "egfr_50_plus": "20mg OD",
+      "egfr_below_15": "avoid"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "atrial_fibrillation"
+    ],
+    "source_url": "https://www.1mg.com/drugs/ordiban-tablet-647571",
+    "notes": "Non-valvular AF ONLY. ~₹150/day. CONTRAINDICATED in valvular/rheumatic AF.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 31,
+    "generic_name": "Apixaban",
+    "generic_name_normalized": "apixaban",
+    "drug_class": "Anticoagulant",
+    "drug_subclass": "DOAC - factor Xa",
+    "indian_brand_name": "Eliquis",
+    "manufacturer": "Pfizer Ltd",
+    "mrp_price": "₹334/strip of 10 (2.5mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_15_plus": "5mg BD (2.5mg if 2 of: age>=80, weight<=60, Cr>=1.5)",
+      "egfr_below_15": "avoid"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "atrial_fibrillation"
+    ],
+    "source_url": "https://www.1mg.com/drugs/eliquis-2.5mg-tablet-138240",
+    "notes": "Non-valvular AF ONLY. Lowest bleeding risk among DOACs. ~₹120/day. CONTRAINDICATED in valvular/rheumatic AF.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 32,
+    "generic_name": "Dabigatran",
+    "generic_name_normalized": "dabigatran",
+    "drug_class": "Anticoagulant",
+    "drug_subclass": "DOAC - direct thrombin",
+    "indian_brand_name": "Dabitra",
+    "manufacturer": "Emcure Pharmaceuticals Ltd",
+    "mrp_price": "₹225/strip (110mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_30_plus": "150mg BD",
+      "egfr_below_30": "avoid"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "atrial_fibrillation"
+    ],
+    "source_url": "https://www.1mg.com/drugs/dabitra-110-capsule-408926",
+    "notes": "Non-valvular AF ONLY. Has reversal agent (idarucizumab). GI upset common. CONTRAINDICATED in valvular/rheumatic AF.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 33,
+    "generic_name": "Streptokinase",
+    "generic_name_normalized": "streptokinase",
+    "drug_class": "Thrombolytic",
+    "drug_subclass": "Fibrinolytic",
+    "indian_brand_name": "Thromboflux 1500000IU",
+    "manufacturer": "Bharat Serums & Vaccines Ltd",
+    "mrp_price": "₹1920/vial (10ml)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "use if needed"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/thromboflux-1500000iu-injection-288098",
+    "notes": "NLEM. KEY INDIAN DRUG. Non-fibrin-specific. 1 hour IV infusion. ~₹5-8K vs Tenecteplase ₹25-35K.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 34,
+    "generic_name": "Tenecteplase",
+    "generic_name_normalized": "tenecteplase",
+    "drug_class": "Thrombolytic",
+    "drug_subclass": "Fibrinolytic",
+    "indian_brand_name": "Tenecterel",
+    "manufacturer": "Reliance Life Sciences",
+    "mrp_price": "₹29870/vial (30mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_all": "use if needed"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/tenecterel-30mg-injection-kit-665741",
+    "notes": "Weight-based single IV bolus. Fibrin-specific. Preferred if affordable.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 35,
+    "generic_name": "Atorvastatin",
+    "generic_name_normalized": "atorvastatin",
+    "drug_class": "Statin",
+    "drug_subclass": "HMG-CoA reductase inhibitor",
+    "indian_brand_name": "Xtor",
+    "manufacturer": "Ipca Laboratories Ltd",
+    "mrp_price": "₹53.23/strip of 10 (10mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "no dose adjustment"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/xtor-10-tablet-114371",
+    "notes": "NLEM. ACS: 80mg load. Maintenance 40-80mg. Cheapest high-intensity statin.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 36,
+    "generic_name": "Rosuvastatin",
+    "generic_name_normalized": "rosuvastatin",
+    "drug_class": "Statin",
+    "drug_subclass": "HMG-CoA reductase inhibitor",
+    "indian_brand_name": "Consivas",
+    "manufacturer": "Rosuvastatin",
+    "mrp_price": "₹78.7/strip of 10 (5mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_30_plus": "use",
+      "egfr_below_30": "max 10mg"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/consivas-5-tablet-31061",
+    "notes": "Higher LDL reduction per mg. Avoid in severe renal impairment.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 37,
+    "generic_name": "Ramipril",
+    "generic_name_normalized": "ramipril",
+    "drug_class": "ACE inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "Ziram",
+    "manufacturer": "FDC Ltd",
+    "mrp_price": "₹32.5/strip of 10 (2.5mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_30_plus": "use",
+      "egfr_below_30": "reduce dose, monitor K+"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/ziram-2.5-tablet-30210",
+    "notes": "NLEM. First-line post-MI, HF, HTN. Hyperkalemia risk with K+-sparing diuretics.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 38,
+    "generic_name": "Enalapril",
+    "generic_name_normalized": "enalapril",
+    "drug_class": "ACE inhibitor",
+    "drug_subclass": null,
+    "indian_brand_name": "EL",
+    "manufacturer": "Sunij Pharma Pvt Ltd",
+    "mrp_price": "₹12.97/strip of 10 (2.5mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_30_plus": "use",
+      "egfr_below_30": "reduce dose"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/el-2.5mg-tablet-266697",
+    "notes": "NLEM. Very cheap. Twice-daily dosing.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 39,
+    "generic_name": "Telmisartan",
+    "generic_name_normalized": "telmisartan",
+    "drug_class": "ARB",
+    "drug_subclass": null,
+    "indian_brand_name": "Telmikind",
+    "manufacturer": "Mankind Pharma Ltd",
+    "mrp_price": "₹25.4/strip of 10 (20mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "use, monitor K+"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/telmikind-20-tablet-73132",
+    "notes": "NLEM. Long-acting ARB. Hyperkalemia risk.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 40,
+    "generic_name": "Metoprolol",
+    "generic_name_normalized": "metoprolol",
+    "drug_class": "Beta blocker",
+    "drug_subclass": "Beta-1 selective",
+    "indian_brand_name": "Metzok",
+    "manufacturer": "USV Private Limited",
+    "mrp_price": "₹40.22/strip of 10 (11.8mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "no dose adjustment"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/metzok-12.5-tablet-pr-18452",
+    "notes": "NLEM. Succinate (XL) for HF. Tartrate for ACS. Masks hypoglycemia symptoms.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 41,
+    "generic_name": "Carvedilol",
+    "generic_name_normalized": "carvedilol",
+    "drug_class": "Beta blocker",
+    "drug_subclass": "Non-selective + alpha-1",
+    "indian_brand_name": "Carvil",
+    "manufacturer": "Zydus Cadila",
+    "mrp_price": "₹65/strip of 10 (3.125mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_all": "no dose adjustment"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/carvil-3.125-tablet-239740",
+    "notes": "Preferred in HFrEF. Titrate slowly. Masks hypoglycemia.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 42,
+    "generic_name": "Bisoprolol",
+    "generic_name_normalized": "bisoprolol",
+    "drug_class": "Beta blocker",
+    "drug_subclass": "Beta-1 selective",
+    "indian_brand_name": "bisELECT",
+    "manufacturer": "Intas Pharmaceuticals Ltd",
+    "mrp_price": "₹41.72/strip of 10 (2.5mg)",
+    "nlem_status": false,
+    "renal_dosing": {
+      "egfr_20_plus": "use",
+      "egfr_below_20": "reduce"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/biselect-2.5-tablet-48503",
+    "notes": "Once daily. HF mortality benefit (CIBIS-II).",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 43,
+    "generic_name": "Furosemide",
+    "generic_name_normalized": "furosemide",
+    "drug_class": "Loop diuretic",
+    "drug_subclass": null,
+    "indian_brand_name": "Lasix",
+    "manufacturer": "Sanofi India Ltd",
+    "mrp_price": "₹13.1/strip of 15 (40mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "use, doses up to 200mg in CKD"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/lasix-tablet-69762",
+    "notes": "NLEM. Mainstay diuretic. Monitor K+ Mg++.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 44,
+    "generic_name": "Spironolactone",
+    "generic_name_normalized": "spironolactone",
+    "drug_class": "K-sparing diuretic",
+    "drug_subclass": "Aldosterone antagonist",
+    "indian_brand_name": "Aldactone",
+    "manufacturer": "RPG Life Sciences Ltd",
+    "mrp_price": "₹34.9/strip of 15 (25mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_30_plus": "use, monitor K+",
+      "egfr_below_30": "avoid"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/aldactone-tablet-116839",
+    "notes": "NLEM. HFrEF mortality benefit (RALES). HYPERKALEMIA RISK with ACEi.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 45,
+    "generic_name": "Amiodarone",
+    "generic_name_normalized": "amiodarone",
+    "drug_class": "Antiarrhythmic",
+    "drug_subclass": "Class III",
+    "indian_brand_name": "Tachyra",
+    "manufacturer": "Cipla",
+    "mrp_price": "₹65.6/strip of 10 (100mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "no dose adjustment"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/tachyra-100-tablet-43493",
+    "notes": "NLEM. Thyroid/lung/liver toxicity. Multiple drug interactions.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 46,
+    "generic_name": "Digoxin",
+    "generic_name_normalized": "digoxin",
+    "drug_class": "Cardiac glycoside",
+    "drug_subclass": null,
+    "indian_brand_name": "Lanoxin",
+    "manufacturer": "Glaxo SmithKline Pharmaceuticals Ltd",
+    "mrp_price": "₹13.9/strip of 10 (0.25mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_50_plus": "0.125-0.25mg",
+      "egfr_below_50": "0.0625-0.125mg, monitor levels"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "source_url": "https://www.1mg.com/drugs/lanoxin-tablet-39496",
+    "notes": "NLEM. Narrow therapeutic index. Toxicity at low K+/Mg++.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 47,
+    "generic_name": "Nitroglycerine (Sublingual)",
+    "generic_name_normalized": "ntg_sublingual",
+    "drug_class": "Nitrate",
+    "drug_subclass": "Short-acting",
+    "indian_brand_name": "Nitroglycerin Controlled Release Tablets",
+    "manufacturer": "Medrock Biotech",
+    "mrp_price": "₹190/strip of 30 (2.6mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "no dose adjustment"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.indiamart.com/proddetail/nitrglycerine-controlled-release-26199997273.html",
+    "notes": "NLEM. SL for acute angina. Caution with SBP <90, sildenafil use.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 48,
+    "generic_name": "Isosorbide Mononitrate",
+    "generic_name_normalized": "ismn",
+    "drug_class": "Nitrate",
+    "drug_subclass": "Long-acting",
+    "indian_brand_name": "Monotrate",
+    "manufacturer": "Sun Pharmaceutical Industries Ltd",
+    "mrp_price": "₹27.19/strip of 10 (10mg)",
+    "nlem_status": true,
+    "renal_dosing": {
+      "egfr_all": "no dose adjustment"
+    },
+    "hf_safe": true,
+    "weight_effect": "neutral",
+    "hypoglycemia_risk": "—",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "source_url": "https://www.1mg.com/drugs/monotrate-10-tablet-119000",
+    "notes": "Daily anti-anginal. Need nitrate-free interval to prevent tolerance.",
+    "created_at": "2026-09-20T12:15:25.526Z"
+  }
+]

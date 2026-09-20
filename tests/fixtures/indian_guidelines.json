@@ -1,0 +1,393 @@
+[
+  {
+    "id": 1,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "Diagnosis",
+    "recommendation": "Diabetes diagnosis: FPG ≥126 mg/dL OR 2-h PG ≥200 mg/dL on 75g OGTT OR HbA1c ≥6.5%. Asymptomatic patients need confirmatory repeat test.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 2,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "First-line therapy",
+    "recommendation": "Metformin is first-line at diagnosis combined with lifestyle intervention. If contraindicated: sulfonylurea, TZD, DPP4i, SGLT2i, AGI, or oral GLP-1 RA.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 3,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "Dual therapy",
+    "recommendation": "Add SGLT2i, DPP4i, sulfonylurea, TZD, AGI or oral GLP-1 RA when targets not achieved on metformin. Patient-centric choice.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 4,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "ASCVD/HF/CKD comorbidity",
+    "recommendation": "In patients with established or high-risk ASCVD, heart failure, diabetic kidney disease, or need for weight loss: prefer SGLT2 inhibitors or GLP-1 RA.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes",
+      "cardiovascular",
+      "heart_failure",
+      "ckd"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 5,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "Elderly with hypoglycemia risk",
+    "recommendation": "In elderly patients with increased risk of hypoglycemia, use a DPP4 inhibitor as an alternative to sulfonylurea.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes",
+      "elderly"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 6,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "HbA1c targets",
+    "recommendation": "General target HbA1c <7%. Stricter <6.5% for young, no comorbidities. Relaxed 7.5-8% for elderly with comorbidities, hypoglycemia history, or limited life expectancy.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 7,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "Insulin initiation",
+    "recommendation": "Initiate insulin in T2DM patients failing three oral agents, with HbA1c >1-1.5% above target, with severe symptomatic hyperglycemia, or in unstable state.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 8,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "Diet (Indian context)",
+    "recommendation": "Carbohydrates 50-60% of calories. Prefer complex carbs and low-GI foods. Limit white rice (GI 73); prefer brown rice (GI 68) or millets. Fiber 25-40g/day. Salt <5g/day.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 9,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "Physical activity",
+    "recommendation": "Minimum 150 min/week moderate aerobic activity. ≥30 min/day. Resistance training 3x/week. At least 5000 steps/day.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 10,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "Postprandial hyperglycemia",
+    "recommendation": "Target PPG <160 mg/dL. AGIs, glinides or SGLT2 inhibitors may be considered for PPG control. Indian diets cause higher PPG due to high-GI traditional foods.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 11,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "Limited care / resource-constrained",
+    "recommendation": "In resource-constrained settings: sulfonylurea or metformin or TZDs may be used. Newer SUs (gliclazide) preferred for low cost and reduced hypoglycemia vs older SUs.",
+    "evidence_level": "B",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 12,
+    "source_id": "CSI",
+    "year": 2017,
+    "condition": "cardiovascular",
+    "section": "STEMI diagnosis",
+    "recommendation": "Diagnose STEMI based on ECG: ST elevation ≥1mm in 2 contiguous limb leads or ≥2mm in 2 contiguous precordial leads. Troponin (I or T) elevation >99th percentile confirms MI.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 13,
+    "source_id": "CSI",
+    "year": 2017,
+    "condition": "cardiovascular",
+    "section": "STEMI primary PCI",
+    "recommendation": "Primary PCI is preferred reperfusion strategy if door-to-balloon time ≤90 min at PCI-capable center, or ≤120 min from first medical contact at non-PCI center.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 14,
+    "source_id": "CSI",
+    "year": 2017,
+    "condition": "cardiovascular",
+    "section": "STEMI fibrinolysis when no PCI",
+    "recommendation": "If PCI not available within 120 min, give fibrinolysis within 30 min of arrival. Streptokinase (₹5-8K, non-fibrin-specific, 1h infusion) or Tenecteplase (₹25-35K, weight-based bolus, fibrin-specific). Tenecteplase preferred if affordable.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 15,
+    "source_id": "CSI",
+    "year": 2017,
+    "condition": "cardiovascular",
+    "section": "STEMI dual antiplatelet",
+    "recommendation": "Loading: Aspirin 162-325mg PO + P2Y12 inhibitor. Ticagrelor 180mg preferred over Clopidogrel 600mg in ACS (PLATO). Continue DAPT 12 months post-ACS.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 16,
+    "source_id": "CSI",
+    "year": 2017,
+    "condition": "cardiovascular",
+    "section": "STEMI anticoagulation",
+    "recommendation": "Anticoagulation in addition to antiplatelets: Unfractionated heparin IV bolus 60 U/kg + infusion, OR Enoxaparin 1 mg/kg SC BD (1 mg/kg OD if eGFR <30).",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 17,
+    "source_id": "CSI",
+    "year": 2017,
+    "condition": "cardiovascular",
+    "section": "Post-MI medication regimen",
+    "recommendation": "Post-MI: DAPT (aspirin + P2Y12i) for 12 months, statin (atorvastatin 80mg or rosuvastatin 40mg), beta blocker (carvedilol/metoprolol/bisoprolol), ACEi/ARB (ramipril/telmisartan).",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 18,
+    "source_id": "CSI",
+    "year": 2020,
+    "condition": "cardiovascular",
+    "section": "STEMI in non-PCI centers",
+    "recommendation": "In non-PCI capable hospitals: fibrinolysis within 30 min of arrival, then transfer to PCI-capable center within 24h (pharmaco-invasive strategy).",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 19,
+    "source_id": "CSI",
+    "year": 2017,
+    "condition": "cardiovascular",
+    "section": "Penicillin allergy considerations",
+    "recommendation": "Penicillin allergy is NOT a contraindication for aspirin, clopidogrel, ticagrelor, heparin, or fibrinolytics. Document allergy for antibiotic prescribing during admission.",
+    "evidence_level": "B",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 20,
+    "source_id": "IHRS/CSI",
+    "year": 2018,
+    "condition": "cardiovascular",
+    "section": "AF stroke risk - CHA2DS2-VASc",
+    "recommendation": "Calculate CHA2DS2-VASc for non-valvular AF. Score ≥2 men or ≥3 women: oral anticoagulation indicated. Score 1 men or 2 women: consider OAC.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular",
+      "atrial_fibrillation"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 21,
+    "source_id": "IHRS/CSI",
+    "year": 2018,
+    "condition": "cardiovascular",
+    "section": "AF anticoagulation choice",
+    "recommendation": "Non-valvular AF: DOAC (apixaban, rivaroxaban, dabigatran) preferred over warfarin. Valvular (rheumatic) AF or mechanical valve: WARFARIN ONLY (DOACs contraindicated). RHD is common in India.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular",
+      "atrial_fibrillation"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 22,
+    "source_id": "IHRS/CSI",
+    "year": 2018,
+    "condition": "cardiovascular",
+    "section": "Triple therapy post-PCI + AF",
+    "recommendation": "Patients with AF + recent PCI requiring triple therapy: shorten triple therapy duration (1-4 weeks), then drop aspirin → continue P2Y12i + DOAC for up to 12 months, then DOAC alone.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular",
+      "atrial_fibrillation"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 23,
+    "source_id": "RSSDI+CSI",
+    "year": 2022,
+    "condition": "overlap",
+    "section": "Diabetes + HFrEF (EF <40%)",
+    "recommendation": "SGLT2 inhibitor (empagliflozin or dapagliflozin) is first-line: dual benefit for glycemia AND heart failure (EMPEROR-Reduced, DAPA-HF). Use regardless of HbA1c if T2DM + HFrEF.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes",
+      "cardiovascular",
+      "heart_failure"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 24,
+    "source_id": "RSSDI+CSI",
+    "year": 2022,
+    "condition": "overlap",
+    "section": "Diabetes + HF - drugs to AVOID",
+    "recommendation": "CONTRAINDICATED in HF: Pioglitazone (fluid retention), Saxagliptin (FDA black box - increased HF hospitalization in SAVOR-TIMI). CAUTION: Glimepiride/glibenclamide (hypoglycemia → cardiac events).",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes",
+      "heart_failure"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 25,
+    "source_id": "RSSDI+CSI",
+    "year": 2022,
+    "condition": "overlap",
+    "section": "Diabetes + HF + CKD hyperkalemia",
+    "recommendation": "In T2DM + HF + CKD on ACEi/ARB + spironolactone: monitor K+ at baseline, 1 week, then monthly. Hold spironolactone if K+ >5.5. Adding SGLT2i mitigates hyperkalemia risk.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes",
+      "heart_failure",
+      "ckd"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 26,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "overlap",
+    "section": "Diabetes + CKD drug choices",
+    "recommendation": "In T2DM + CKD: SGLT2i (empagliflozin/dapagliflozin) or GLP-1 RA preferred for renoprotection. ACEi/ARB mandatory if albuminuria. Linagliptin if DPP4i needed (no renal dose adjustment).",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes",
+      "ckd"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 27,
+    "source_id": "RSSDI",
+    "year": 2022,
+    "condition": "overlap",
+    "section": "Diabetes + NAFLD",
+    "recommendation": "Pioglitazone has evidence for NASH improvement. SGLT2i emerging data for NAFLD. Both beneficial in fatty liver - but Pioglitazone CONTRAINDICATED if concurrent HF.",
+    "evidence_level": "B",
+    "condition_tags": [
+      "diabetes",
+      "nafld"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 28,
+    "source_id": "MoHFW_STG",
+    "year": 2022,
+    "condition": "diabetes",
+    "section": "NLEM essential drugs - diabetes",
+    "recommendation": "NLEM 2022 includes: Metformin, Glibenclamide, Gliclazide, Glimepiride, Insulin (regular, NPH, premixed 30/70). These are price-controlled and available at Jan Aushadhi.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "diabetes"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  },
+  {
+    "id": 29,
+    "source_id": "MoHFW_STG",
+    "year": 2022,
+    "condition": "cardiovascular",
+    "section": "NLEM essential drugs - cardiovascular",
+    "recommendation": "NLEM 2022 cardiovascular: Aspirin, Clopidogrel, Atorvastatin, Ramipril, Enalapril, Telmisartan, Metoprolol, Atenolol, Furosemide, Spironolactone, Digoxin, Warfarin, Amiodarone, Heparin, Streptokinase, GTN, ISMN.",
+    "evidence_level": "A",
+    "condition_tags": [
+      "cardiovascular"
+    ],
+    "created_at": "2026-09-20T12:15:25.526Z"
+  }
+]

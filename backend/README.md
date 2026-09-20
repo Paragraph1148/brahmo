@@ -7,7 +7,7 @@ input through both, so a rule that was ported wrong fails here.
 
 ```bash
 uv sync --extra dev
-uv run pytest            # 51 tests
+uv run pytest            # 68 tests
 ```
 
 The TypeScript side must be installed (`npm install` at the repo root); the
@@ -98,6 +98,51 @@ property belonging to one record applied to another.
 severity is only ever read from the entry that matched. The property is pinned
 directly: dropping every non-aspirin entry must not change the aspirin verdict.
 
+### A patient on one drug got no interaction check at all
+
+`checkInteractions` opens with `if (drugIds.length < 2) return []`. The guard
+reads as common sense — an interaction needs two drugs — but the table holds
+interactions whose other side is a non-formulary substance with a null id:
+alcohol, IV contrast, steroids. Those need exactly one patient drug, and the
+early return discards every one of them. Against the live engine:
+
+```
+meds=[Metformin]                 -> 0 interaction flags
+meds=[Metformin, Atorvastatin]   -> 4, three of them Metformin's own:
+                                    IV contrast (severe), alcohol, steroids
+```
+
+The same prescription is checked or not depending on what sits beside it.
+Metformin with IV contrast is a hold-before-imaging contraindication, and
+seeded patient #3 — an auto-driver on metformin alone, no insurance — comes
+back with an empty report on all three. That is the whole golden report for
+that patient: zero flags.
+
+### The sulfonylurea renal flag cited one threshold and used another
+
+It fires a single `critical` "STOP" at any eGFR below 60, in a flag whose own
+detail text reads *"RSSDI 2022: STOP sulfonylurea when eGFR <30"*. A patient at
+eGFR 44 is told to stop a drug by a citation that says to continue it. RSSDI
+grades the response — reduce and monitor between 30 and 60, stop below 30 — and
+this port follows the guideline it cites. The same block also applied
+sulfonylurea-specific wording to any drug with moderate or high hypoglycemia
+risk, so the advice could name a class the patient was not on.
+
+### An unidentified medication was checked for nothing
+
+Every checker begins `if (!m.drug_id) continue`. A drug the resolver cannot
+match produces no renal flag, no heart-failure flag and no interaction — and
+the report comes back clean because nothing was looked at. Seeded patients 2
+and 7 each carry one (`Pregabalin`, `Penicillin V`). Resolution failure is now
+a flag in its own right.
+
+Related: resolution fell back to the first prefix match while iterating rows
+from `select * from drugs`, a query with no `ORDER BY`. The seed holds three
+insulins, so a medication written as plain `Insulin` matched whichever row came
+back first. The determinism test passes because Postgres returns seed rows in a
+stable physical order — luck, not a guarantee. A prefix match now resolves only
+when it is unique, and ambiguity is reported.
+
 ### "No known drug allergies" parsed as an allergy to drugs
 
 Found by a unit test written against the new parser, and present in the
@@ -117,3 +162,13 @@ drug allergies`, `denies allergies`) and carries no entry for them.
   transcribed `Math.round` silently disagrees on every half. Pinned by test.
 - **Allergies are records, not strings.** A substance and its own reaction, so
   severity cannot cross entries. Above.
+- **Every flag carries provenance.** Which rule fired, which patient fields it
+  read, which guideline it rests on. Without that, "check the retrieval layer
+  never contradicts a deterministic flag" cannot be implemented: there is no
+  stated basis to check against.
+- **Prices are `Decimal`.** The TypeScript carries `mrp_price` as a string and
+  parses it with `Number` at the point of display. Binary floating point cannot
+  represent most rupee amounts exactly, in a system whose argument is cost.
+- **`drug_id is None`, not falsy.** `!!id` and `!m.drug_id` also discard id 0.
+  Nothing is lost against a Postgres serial; a formulary loaded from anywhere
+  else would lose a drug silently.

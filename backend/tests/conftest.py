@@ -26,3 +26,36 @@ def ts() -> Iterator[TsBridge]:
         yield bridge
     finally:
         bridge.close()
+
+
+# ---------------------------------------------------------------------------
+# The engine, built from the exported seed fixtures.
+# ---------------------------------------------------------------------------
+
+import json  # noqa: E402
+
+from brahmo.drugs import Formulary  # noqa: E402
+from brahmo.engine import Engine  # noqa: E402
+from brahmo.interactions import InteractionTable  # noqa: E402
+
+FIXTURES = REPO_ROOT / "tests" / "fixtures"
+GOLDEN = REPO_ROOT / "tests" / "golden"
+
+
+def _rows(name: str) -> list[dict]:
+    return json.loads((FIXTURES / name).read_text())
+
+
+@pytest.fixture(scope="session")
+def engine() -> Engine:
+    """The engine over the real seeded formulary."""
+    return Engine(
+        formulary=Formulary.from_rows(_rows("drugs.json")),
+        interactions=InteractionTable.from_rows(_rows("drug_interactions.json")),
+    )
+
+
+@pytest.fixture(scope="session")
+def golden_cases() -> list[dict]:
+    """Every patient with the TypeScript engine's recorded report."""
+    return [json.loads(p.read_text()) for p in sorted(GOLDEN.glob("patient-*.json"))]
