@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Deterministic clinical safety engine for Indian practice — Python core"
 requires-python = ">=3.11"
 dependencies = [
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
     "pydantic>=2.9",
+    "uvicorn[standard]>=0.53.0",
 ]
 
 [project.optional-dependencies]
@@ -26,6 +29,10 @@ packages = ["src/brahmo"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+filterwarnings = [
+    "ignore:Using `httpx` with `starlette.testclient`:DeprecationWarning",
+    "ignore:The anyio.abc.BlockingPortal alias is deprecated:DeprecationWarning",
+]
 
 [tool.ruff]
 line-length = 100

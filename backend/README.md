@@ -7,8 +7,13 @@ input through both, so a rule that was ported wrong fails here.
 
 ```bash
 uv sync --extra dev
-uv run pytest            # 95 tests
+uv run pytest                                            # 128 tests
+uv run uvicorn --factory brahmo.api:create_app --reload  # http://127.0.0.1:8000
 ```
+
+Interactive API docs at `/docs`. The service needs no database and no API key:
+the corpus loads from `tests/fixtures/`, exported from `schema.sql` + `seed.sql`
+by `npm run fixtures` at the repository root.
 
 The TypeScript side must be installed (`npm install` at the repo root); the
 differential tests skip with a message if it is not.
@@ -211,6 +216,47 @@ cannot drift apart silently. Nothing reads it; it is prose for the model.
 One addition: a medication the engine could not check now appears in the prompt
 under its own heading. A prompt that presents a safety review without saying it
 skipped a drug the patient is taking is worse than one that says nothing.
+
+## The service
+
+`brahmo.api` exposes the deterministic layer over HTTP. Route names match the
+Next.js API it replaces, so the existing frontend needs a base URL change and
+nothing else.
+
+| route | what it does |
+|---|---|
+| `GET /health` | status, corpus row counts, configured model |
+| `GET /patients` · `GET /patients/{id}` | the seeded patients |
+| `POST /safety-check` | the deterministic verdict — no model, no network |
+| `POST /compose-prompt` | the prompt a model *would* get, without sending it |
+| `POST /consult` | safety first, then the model |
+
+Two properties are structural rather than documented.
+
+**The safety path cannot reach a model.** `/safety-check` and `/compose-prompt`
+import nothing from `brahmo.model`. `tests/api/test_no_network.py` severs
+`socket.connect`, `create_connection`, `getaddrinfo` and
+`SSLContext.wrap_socket` for the whole process, drives every deterministic
+route through including all six seeded patients, and checks that the guard
+itself bites — a test that cannot fail proves nothing. This catches what the
+library-level harness cannot: a route handler enriching a response with a model
+call before returning it, leaving the engine untouched and the guarantee
+quietly false.
+
+**The model cannot change the clinical content.** `/consult` settles the report
+and composes the prompt before the model is touched. With none configured it
+still returns the verdict and the prompts, with `answers.error` saying why
+nothing was generated — and a test asserts the report is byte-identical whether
+or not a model answered.
+
+`PatientRef` takes either `patient_id` or an inline `patient`, and rejects both
+or neither with a 422. Accepting both and silently preferring one is how a
+caller ends up reading a report for a patient they did not send.
+
+Every response carries `Server-Timing`. That is the seam the roadmap's query
+telemetry hangs off: one place that already knows the route and the wall-clock
+cost, so shipping those to a time-series store is a sink swap rather than a
+refactor.
 
 ## Design changes from the TypeScript
 

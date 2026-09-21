@@ -74,3 +74,11 @@ def composer() -> "Composer":
         stock=HospitalFormulary(_rows("hospital_formulary.json")),
         instructions=response_instructions(),
     )
+
+
+@pytest.fixture(scope="session")
+def api_corpus():
+    """The corpus the HTTP tests run on, from the exported fixtures."""
+    from brahmo.corpus import Corpus
+
+    return Corpus.from_json_dir(FIXTURES)
