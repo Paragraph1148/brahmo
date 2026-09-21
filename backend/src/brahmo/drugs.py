@@ -48,7 +48,9 @@ class Drug:
     drug_subclass: str | None
     indian_brand_name: str
     manufacturer: str
-    mrp_price: Decimal | None
+    mrp_price: str
+    mrp_amount: Decimal | None
+    mrp_pack: str | None
     nlem_status: bool
     renal_dosing: dict[str, str]
     hf_safe: bool | None
@@ -68,7 +70,9 @@ class Drug:
             drug_subclass=row.get("drug_subclass"),
             indian_brand_name=row.get("indian_brand_name") or "",
             manufacturer=row.get("manufacturer") or "",
-            mrp_price=_as_money(row.get("mrp_price")),
+            mrp_price=row.get("mrp_price") or "",
+            mrp_amount=_price_amount(row.get("mrp_price")),
+            mrp_pack=_price_pack(row.get("mrp_price")),
             nlem_status=bool(row.get("nlem_status")),
             renal_dosing=dict(row.get("renal_dosing") or {}),
             hf_safe=row.get("hf_safe"),
@@ -80,19 +84,35 @@ class Drug:
         )
 
 
-def _as_money(value: Any) -> Decimal | None:
-    """Prices are money, so they are Decimal.
+#: ``mrp_price`` is ``TEXT NOT NULL`` holding a rendered string, not a number:
+#: "\u20b984.8/strip of 10 (20mg)". The amount, the pack size and the strength are
+#: all in the one field. So the raw text is kept for display -- changing how a
+#: price reads in the prompt is not this port's business -- and the amount is
+#: parsed out beside it for anything that needs to compute with it.
+_PRICE = re.compile(r"^\s*\u20b9?\s*([0-9]+(?:\.[0-9]+)?)\s*(?:/\s*(.*))?$")
 
-    The TypeScript carries ``mrp_price`` as a string and parses it with
-    ``Number`` at the point of display. Binary floating point cannot represent
-    most rupee amounts exactly, and this system's whole argument is about cost.
+
+def _price_amount(value: Any) -> Decimal | None:
+    """The rupee amount, when one can be read off the text.
+
+    Decimal rather than float: these are money, and this system's argument is
+    about cost. A price that cannot be parsed returns None rather than zero,
+    so a missing amount is visible instead of looking free.
     """
-    if value is None:
+    match = _PRICE.match(str(value or ""))
+    if not match:
         return None
     try:
-        return Decimal(str(value))
-    except (InvalidOperation, ValueError):
+        return Decimal(match.group(1))
+    except InvalidOperation:
         return None
+
+
+def _price_pack(value: Any) -> str | None:
+    """What the amount buys -- "strip of 10 (20mg)"."""
+    match = _PRICE.match(str(value or ""))
+    pack = match.group(2) if match else None
+    return pack.strip() if pack else None
 
 
 class Resolution(Enum):

@@ -1,0 +1,386 @@
+[
+  {
+    "id": 1,
+    "drug_id": 1,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Multiple brands. Glyciphage SR most stocked.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 2,
+    "drug_id": 2,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Amaryl + generics available.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 3,
+    "drug_id": 3,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Diamicron MR primary stock.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 4,
+    "drug_id": 4,
+    "in_stock": true,
+    "stock_level": "low",
+    "pharmacy_notes": "Older SU - limited stock.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 5,
+    "drug_id": 5,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Most-prescribed DPP4i locally.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 6,
+    "drug_id": 6,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Branded Januvia + generics.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 7,
+    "drug_id": 7,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Galvus + Galvus Met FDCs.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 8,
+    "drug_id": 8,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Trajenta - preferred for CKD.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 9,
+    "drug_id": 9,
+    "in_stock": false,
+    "stock_level": "—",
+    "pharmacy_notes": "Not preferred due to HF black box. Available on indent.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 10,
+    "drug_id": 10,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Jardiance widely stocked.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 11,
+    "drug_id": 11,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Forxiga + generics. First-line for HFrEF.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 12,
+    "drug_id": 12,
+    "in_stock": true,
+    "stock_level": "low",
+    "pharmacy_notes": "Limited use due to amputation risk.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 13,
+    "drug_id": 13,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "FLAG: avoid in HF patients.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 14,
+    "drug_id": 14,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Lantus + Basalog biosimilar.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 15,
+    "drug_id": 15,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Mixtard 30/70 - main premixed.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 16,
+    "drug_id": 16,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Actrapid IV for DKA.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 17,
+    "drug_id": 17,
+    "in_stock": true,
+    "stock_level": "low",
+    "pharmacy_notes": "Victoza - high cost, low turnover.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 18,
+    "drug_id": 18,
+    "in_stock": true,
+    "stock_level": "low",
+    "pharmacy_notes": "Trulicity - very expensive.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 19,
+    "drug_id": 19,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Glucobay for postprandial.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 20,
+    "drug_id": 20,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Glycomet-GP series widely used.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 21,
+    "drug_id": 21,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Zita Met popular.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 22,
+    "drug_id": 22,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Galvus Met.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 23,
+    "drug_id": 23,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Ecosprin 75mg + 150mg in ED.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 24,
+    "drug_id": 24,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Clopilet + Plavix stocked.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 25,
+    "drug_id": 25,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Brilinta - first-line ACS antiplatelet.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 26,
+    "drug_id": 26,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Effient - secondary choice.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 27,
+    "drug_id": 27,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Standard ACS anticoagulation in ED/CCU.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 28,
+    "drug_id": 28,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Clexane prefilled syringes available.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 29,
+    "drug_id": 29,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Warf - cheap, INR clinic available.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 30,
+    "drug_id": 30,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Xarelto + generics for non-valvular AF.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 31,
+    "drug_id": 31,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Eliquis - preferred in elderly/bleeding risk.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 32,
+    "drug_id": 32,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Pradaxa - reversal agent available (Praxbind).",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 33,
+    "drug_id": 33,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "CRITICAL: stocked for thrombolysis. ~₹5-8K.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 34,
+    "drug_id": 34,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "TNKase - higher cost option. Single bolus.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 35,
+    "drug_id": 35,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "ACS loading dose 80mg available.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 36,
+    "drug_id": 36,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Rozavel + generics.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 37,
+    "drug_id": 37,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Cardace - first-line for HF/post-MI.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 38,
+    "drug_id": 38,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Enam - cheap NLEM alternative.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 39,
+    "drug_id": 39,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Telma - widely prescribed ARB.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 40,
+    "drug_id": 40,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Metolar XL (succinate) for HF. Tartrate for ACS.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 41,
+    "drug_id": 41,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Carloc - preferred for HFrEF.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 42,
+    "drug_id": 42,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Concor available.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 43,
+    "drug_id": 43,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Lasix IV + oral. Foundational diuretic.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 44,
+    "drug_id": 44,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Aldactone - monitor K+ closely.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 45,
+    "drug_id": 45,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Cordarone IV + oral. ICU stocked.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 46,
+    "drug_id": 46,
+    "in_stock": true,
+    "stock_level": "moderate",
+    "pharmacy_notes": "Lanoxin - check levels available.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 47,
+    "drug_id": 47,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Sorbitrate - ED essential.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  },
+  {
+    "id": 48,
+    "drug_id": 48,
+    "in_stock": true,
+    "stock_level": "high",
+    "pharmacy_notes": "Monotrate - daily anti-anginal.",
+    "updated_at": "2026-09-21T06:01:11.339Z"
+  }
+]

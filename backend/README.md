@@ -7,7 +7,7 @@ input through both, so a rule that was ported wrong fails here.
 
 ```bash
 uv sync --extra dev
-uv run pytest            # 68 tests
+uv run pytest            # 95 tests
 ```
 
 The TypeScript side must be installed (`npm install` at the repo root); the
@@ -98,6 +98,33 @@ property belonging to one record applied to another.
 severity is only ever read from the entry that matched. The property is pinned
 directly: dropping every non-aspirin entry must not change the aspirin verdict.
 
+### One report called the same patient's AF both valvular and non-valvular
+
+`safety-engine.ts` asks "is this valvular?" three times with three different
+keyword lists — three keywords at lines 458 and 470, five at line 558. A
+patient charted as plain "Mitral Stenosis" satisfies the long list and not the
+short one, so a single report carries both verdicts. Against the live engine:
+
+```
+conditions=["Mitral Stenosis", "Atrial Fibrillation"]
+  flag:    Valvular AF → Anticoagulation INDICATED regardless of CHA₂DS₂-VASc
+  flag:    Non-valvular AF: DOAC preferred over Warfarin
+  classes: ["DOAC"]
+```
+
+Rheumatic mitral stenosis is routinely charted without the word "rheumatic",
+and a DOAC in rheumatic MS is the exact error this project was built to
+prevent — it is the headline row of the README's own comparison table. Seeded
+patient #7 escapes only because their problem list also carries "RHD".
+
+`conditions.py` has one definition and one call site. It also splits two
+questions the original conflated: `is_valvular_for_retrieval` is liberal and
+pulls the valve guidelines, while `doac_contraindicated` is narrow — mitral
+stenosis and mechanical prostheses, the two lesions that actually make a DOAC
+unsafe. Isolated aortic stenosis is valve disease but not a DOAC
+contraindication, and sending such a patient to warfarin means lifelong INR
+monitoring they do not need.
+
 ### A patient on one drug got no interaction check at all
 
 `checkInteractions` opens with `if (drugIds.length < 2) return []`. The guard
@@ -152,6 +179,39 @@ The commonest value in the field read as a positive finding. `AllergyList` now
 recognises the no-allergy sentinels (`NKDA`, `NKA`, `none`, `nil`, `no known
 drug allergies`, `denies allergies`) and carries no entry for them.
 
+### The drug list's order depended on the server's locale
+
+Both list sections re-sort client-side with `String.prototype.localeCompare`
+and no locale argument, which resolves against whatever locale the host is in.
+Locale collation is case-insensitive at the primary level and code-point order
+is not, so the section breaks already fall in different places:
+
+```
+localeCompare:  ### Alpha-glucosidase inhibitor   then   ### ARB
+code points:    ### ARB                           then   ### Alpha-glucosidase
+```
+
+Neither order is wrong, but the prompt handed to the model should not depend on
+where the server runs. `retrieval.collate` fixes an explicit key: case-folded
+first so the reading order is the natural one, then the exact string to break
+the ties case-folding creates, then the id so the ordering is total.
+
+## The composer
+
+`composer.py` reproduces the TypeScript prompt exactly. Every section except
+the safety block matches byte for byte across all nine patients, as do the
+condition tags, guideline and drug counts, active sources, and the generic
+contrast arm. The safety block differs only because it renders this port's
+report, which raises flags the original does not.
+
+The response-instruction block is held as data in `data/response_instructions.md`
+and was extracted verbatim from the TypeScript rather than retyped, so the two
+cannot drift apart silently. Nothing reads it; it is prose for the model.
+
+One addition: a medication the engine could not check now appears in the prompt
+under its own heading. A prompt that presents a safety review without saying it
+skipped a drug the patient is taking is worse than one that says nothing.
+
 ## Design changes from the TypeScript
 
 - **eGFR is not rounded before banding.** Above.
@@ -166,9 +226,12 @@ drug allergies`, `denies allergies`) and carries no entry for them.
   read, which guideline it rests on. Without that, "check the retrieval layer
   never contradicts a deterministic flag" cannot be implemented: there is no
   stated basis to check against.
-- **Prices are `Decimal`.** The TypeScript carries `mrp_price` as a string and
-  parses it with `Number` at the point of display. Binary floating point cannot
-  represent most rupee amounts exactly, in a system whose argument is cost.
+- **Prices keep their text and gain a parsed amount.** `mrp_price` is
+  `TEXT NOT NULL` holding a rendered string — `₹84.8/strip of 10 (20mg)` —
+  with amount, pack size and strength in one field. The raw text is kept for
+  display, and `mrp_amount` parses the rupee figure out beside it as a
+  `Decimal` for anything that computes with it. An unparseable price is `None`
+  rather than zero, so a missing amount is visible instead of looking free.
 - **`drug_id is None`, not falsy.** `!!id` and `!m.drug_id` also discard id 0.
   Nothing is lost against a Postgres serial; a formulary loaded from anywhere
   else would lose a drug silently.

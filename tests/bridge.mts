@@ -17,6 +17,7 @@ import * as calc from "../src/lib/calculators.js";
 // place before it is imported. Calculators are pure and need none of this.
 await installShim();
 const engine = await import("../src/lib/safety-engine.js");
+const composer = await import("../src/lib/prompt-composer.js");
 
 type Handler = (args: unknown[]) => unknown;
 
@@ -36,6 +37,14 @@ const FNS: Record<string, Handler> = {
 // Async handlers are kept separate: the safety engine hits the database.
 const ASYNC_FNS: Record<string, (args: unknown[]) => Promise<unknown>> = {
   runSafetyChecks: async ([patient]) => engine.runSafetyChecks(patient as never),
+  composePrompt: async ([patient, question]) => {
+    const report = await engine.runSafetyChecks(patient as never);
+    return composer.composePrompt(patient as never, report, question as string);
+  },
+  deriveConditionTags: async ([patient]) => {
+    const { deriveConditionTags } = await import("../src/lib/conditions.js");
+    return deriveConditionTags(patient as never);
+  },
 };
 
 const rl = createInterface({ input: process.stdin, crlfDelay: Infinity });

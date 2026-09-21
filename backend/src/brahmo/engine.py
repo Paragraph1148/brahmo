@@ -31,7 +31,7 @@ from brahmo.conditions import (
     is_diabetic,
     is_elderly,
     is_hf,
-    is_valvular,
+    doac_contraindicated,
 )
 from brahmo.domain.patient import Patient
 from brahmo.drugs import Formulary, Resolution, ResolvedMedication
@@ -555,7 +555,7 @@ def _check_allergies(
 def _check_anticoagulation(patient: Patient, chads_vasc: int | None) -> list[SafetyFlag]:
     if chads_vasc is None:
         return []
-    valvular = is_valvular(patient)
+    valvular = doac_contraindicated(patient)
     indicated = valvular or should_anticoagulate(chads_vasc, patient.sex)
     threshold = "≥3 for women" if patient.sex == "F" else "≥2 for men"
 
@@ -656,7 +656,7 @@ def _recommend_drug_classes(
         )
 
     if is_af(patient):
-        if is_valvular(patient):
+        if doac_contraindicated(patient):
             classes.append("Warfarin (RHD/valvular AF)")
             flags.append(
                 SafetyFlag(

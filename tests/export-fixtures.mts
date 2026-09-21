@@ -21,6 +21,7 @@ for (const [table, order] of [
   ["drug_interactions", "id"],
   ["indian_guidelines", "id"],
   ["patients", "id"],
+  ["hospital_formulary", "id"],
 ] as const) {
   const res = await pg.query(`SELECT * FROM ${table} ORDER BY ${order}`);
   writeFileSync(join(OUT, `${table}.json`), JSON.stringify(res.rows, null, 2) + "\n");

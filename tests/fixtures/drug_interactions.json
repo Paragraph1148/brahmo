@@ -9,7 +9,7 @@
     "mechanism": "Additive hypoglycemic effect; alcohol impairs gluconeogenesis",
     "clinical_effect": "Severe hypoglycemia, disulfiram-like reaction",
     "management": "Avoid alcohol. If consumed, eat carbs, monitor glucose.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 2,
@@ -21,7 +21,7 @@
     "mechanism": "Both SUs - duplicative therapy",
     "clinical_effect": "Profound hypoglycemia",
     "management": "Never combine sulfonylureas.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 3,
@@ -33,7 +33,7 @@
     "mechanism": "Risk of contrast-induced AKI → metformin accumulation → lactic acidosis",
     "clinical_effect": "Lactic acidosis",
     "management": "Hold metformin 48h before and after IV contrast if eGFR <60.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 4,
@@ -45,7 +45,7 @@
     "mechanism": "Additive fluid retention",
     "clinical_effect": "Edema, weight gain, HF exacerbation",
     "management": "Monitor for edema. Avoid in HF.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 5,
@@ -57,7 +57,7 @@
     "mechanism": "Both lower glucose (additive)",
     "clinical_effect": "Hypoglycemia risk",
     "management": "Consider reducing SU dose when adding DPP4i.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 6,
@@ -69,7 +69,7 @@
     "mechanism": "Standard DAPT - intended combination but bleeding risk",
     "clinical_effect": "Bleeding (GI, intracranial)",
     "management": "Standard ACS therapy. PPI if GI risk. Monitor Hb.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 7,
@@ -81,7 +81,7 @@
     "mechanism": "Combined antiplatelet + anticoagulant",
     "clinical_effect": "Major bleeding risk",
     "management": "Use only when essential. Limit duration. Add PPI.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 8,
@@ -93,7 +93,7 @@
     "mechanism": "Dual RAAS blockade + K-sparing diuretic",
     "clinical_effect": "HYPERKALEMIA (can be fatal)",
     "management": "Monitor K+ at baseline, 1 week, then monthly. Hold if K+ >5.5.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 9,
@@ -105,7 +105,7 @@
     "mechanism": "Dual RAAS + K-sparing",
     "clinical_effect": "Hyperkalemia",
     "management": "Monitor K+ closely. Avoid combination in CKD.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 10,
@@ -117,7 +117,7 @@
     "mechanism": "Amiodarone inhibits CYP2C9 → reduces warfarin metabolism",
     "clinical_effect": "INR elevation, bleeding",
     "management": "Reduce warfarin dose 30-50% when starting amiodarone. Check INR weekly initially.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 11,
@@ -129,7 +129,7 @@
     "mechanism": "Amiodarone increases digoxin levels via P-gp inhibition",
     "clinical_effect": "Digoxin toxicity (arrhythmia, GI symptoms)",
     "management": "Reduce digoxin dose by 50%. Check digoxin level.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 12,
@@ -141,7 +141,7 @@
     "mechanism": "Additive AV node suppression",
     "clinical_effect": "Bradycardia, AV block",
     "management": "Monitor HR, ECG. Use cautiously.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 13,
@@ -153,7 +153,7 @@
     "mechanism": "Furosemide-induced hypokalemia potentiates digoxin toxicity",
     "clinical_effect": "Digoxin toxicity",
     "management": "Monitor K+ and Mg++. Replete as needed.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 14,
@@ -165,7 +165,7 @@
     "mechanism": "Amiodarone inhibits CYP3A4 → increased atorvastatin levels",
     "clinical_effect": "Myopathy, rhabdomyolysis",
     "management": "Limit atorvastatin to 20mg max with amiodarone.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 15,
@@ -177,7 +177,7 @@
     "mechanism": "Combined anticoagulant + antiplatelet",
     "clinical_effect": "Bleeding",
     "management": "Only use combination when essential (e.g. mechanical valve + recent stent).",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 16,
@@ -189,7 +189,7 @@
     "mechanism": "Beta blockade masks tachycardia of hypoglycemia",
     "clinical_effect": "Hypoglycemia unawareness",
     "management": "Educate patient on non-adrenergic symptoms. Monitor glucose closely.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 17,
@@ -201,7 +201,7 @@
     "mechanism": "Beta blockade masks hypoglycemia",
     "clinical_effect": "Hypoglycemia unawareness",
     "management": "Educate patient. SMBG essential.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 18,
@@ -213,7 +213,7 @@
     "mechanism": "Additive diuresis",
     "clinical_effect": "Dehydration, hypotension, AKI",
     "management": "Reduce furosemide dose by 25-50% when starting SGLT2i. Monitor BP, weight.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 19,
@@ -225,7 +225,7 @@
     "mechanism": "Additive diuresis and electrolyte shifts",
     "clinical_effect": "Volume depletion, electrolyte imbalance",
     "management": "Monitor BP, K+, renal function.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 20,
@@ -237,7 +237,7 @@
     "mechanism": "Minor risk of hypoglycemia + lactic acidosis if AKI develops",
     "clinical_effect": "Hyperkalemia, AKI risk in dehydration",
     "management": "Monitor K+ and renal function. Hold metformin if dehydrated.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 21,
@@ -249,7 +249,7 @@
     "mechanism": "Additive fluid retention",
     "clinical_effect": "Edema, HF exacerbation",
     "management": "Avoid in HF. Monitor for edema.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 22,
@@ -261,7 +261,7 @@
     "mechanism": "Beta blockade masks hypoglycemia + may prolong recovery",
     "clinical_effect": "Hypoglycemia unawareness, delayed recovery",
     "management": "Educate patient. Frequent SMBG. Glucagon available.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 23,
@@ -273,7 +273,7 @@
     "mechanism": "No clinically significant interaction",
     "clinical_effect": "Unknown",
     "management": "Safe to combine. Standard in T2DM + CVD.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 24,
@@ -285,7 +285,7 @@
     "mechanism": "Increased lactic acidosis risk; impairs gluconeogenesis",
     "clinical_effect": "Lactic acidosis, hypoglycemia",
     "management": "Limit alcohol. Avoid binge drinking. Patient education.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 25,
@@ -297,7 +297,7 @@
     "mechanism": "NSAID blocks aspirin's antiplatelet effect (competitive COX-1 binding)",
     "clinical_effect": "Reduced cardioprotection + dual GI bleeding risk",
     "management": "Avoid concurrent use. If NSAID needed, take aspirin 2h before NSAID.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 26,
@@ -309,7 +309,7 @@
     "mechanism": "CYP3A4 inhibition → increased statin levels",
     "clinical_effect": "Myopathy, rhabdomyolysis",
     "management": "Avoid or hold statin during macrolide course. Use azithromycin instead.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 27,
@@ -321,7 +321,7 @@
     "mechanism": "CYP2C9 inhibition by fluconazole",
     "clinical_effect": "INR elevation, bleeding",
     "management": "Reduce warfarin dose. Check INR within 3 days.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 28,
@@ -333,7 +333,7 @@
     "mechanism": "Steroids cause hyperglycemia",
     "clinical_effect": "Loss of glycemic control",
     "management": "Increase antidiabetic doses during steroid course. Monitor glucose.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 29,
@@ -345,7 +345,7 @@
     "mechanism": "Steroid-induced hyperglycemia",
     "clinical_effect": "Hyperglycemia",
     "management": "May need additional agent during steroid course.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   },
   {
     "id": 30,
@@ -357,6 +357,6 @@
     "mechanism": "Both irritate gastric mucosa",
     "clinical_effect": "GI bleeding risk",
     "management": "Limit alcohol. Use PPI if needed.",
-    "created_at": "2026-09-20T12:15:25.526Z"
+    "created_at": "2026-09-21T06:01:11.339Z"
   }
 ]

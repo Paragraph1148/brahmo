@@ -59,3 +59,18 @@ def engine() -> Engine:
 def golden_cases() -> list[dict]:
     """Every patient with the TypeScript engine's recorded report."""
     return [json.loads(p.read_text()) for p in sorted(GOLDEN.glob("patient-*.json"))]
+
+
+@pytest.fixture(scope="session")
+def composer() -> "Composer":
+    """The composer over the real seeded corpus."""
+    from brahmo import response_instructions
+    from brahmo.composer import Composer
+    from brahmo.retrieval import GuidelineLibrary, HospitalFormulary
+
+    return Composer(
+        formulary=Formulary.from_rows(_rows("drugs.json")),
+        guidelines=GuidelineLibrary.from_rows(_rows("indian_guidelines.json")),
+        stock=HospitalFormulary(_rows("hospital_formulary.json")),
+        instructions=response_instructions(),
+    )
