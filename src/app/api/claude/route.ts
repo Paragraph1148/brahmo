@@ -12,25 +12,26 @@
 //   1. Generic baseline (no India context) — proves the contrast
 //   2. Option C with full India-injected context
 //
-// Currently wired to Groq's free-tier Llama. The route path is kept as
-// `/api/claude` so the rest of the app doesn't need to change. To swap
-// back to Anthropic, replace the Groq client with the Anthropic SDK.
+// The safety report and both prompts come from the Python service, which
+// settles every clinical decision before this route touches a model. The
+// model call itself stays here: the Groq SDK and the API key already live
+// in this process, and moving them would duplicate key handling for no
+// gain. The ordering guarantee is unaffected — by the time `callLLM` runs,
+// the verdict is already computed and is returned whether or not the model
+// answers.
+//
+// The route path is kept as `/api/claude` so the rest of the app doesn't
+// need to change. To swap providers, replace the Groq client below.
 // =================================================================
 import { NextResponse } from "next/server";
 import { Groq } from "groq-sdk";
-import { supabase } from "@/lib/supabase";
-import { runSafetyChecks } from "@/lib/safety-engine";
-import { composePrompt } from "@/lib/prompt-composer";
-import type { Patient } from "@/lib/types";
+import { errorResponse, post } from "@/lib/backend";
 
 const apiKey = process.env.GROQ_API_KEY;
 const groq = apiKey ? new Groq({ apiKey }) : null;
 
-// Llama 4 Scout 17B - Groq's free-tier large model, good for clinical text.
-// Alternates: 'llama-3.3-70b-versatile' (slower, higher quality),
-//             'llama-3.1-8b-instant' (fastest, lower quality).
 const MODEL = "llama-3.3-70b-versatile";
-const MAX_TOKENS = 2200; // increased so the structured response has room for cost comparisons + sections
+const MAX_TOKENS = 2200;
 
 async function callLLM(prompt: string): Promise<string> {
   if (!groq) {
@@ -51,45 +52,30 @@ async function callLLM(prompt: string): Promise<string> {
   return completion.choices[0]?.message?.content || "";
 }
 
+type Composed = {
+  report: unknown;
+  optionC: string;
+  generic: string;
+  meta: unknown;
+};
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    let patient: Patient | null = null;
-
-    if (body.patient) {
-      patient = body.patient as Patient;
-    } else if (typeof body.patient_id === "number") {
-      const { data, error } = await supabase
-        .from("patients")
-        .select("*")
-        .eq("id", body.patient_id)
-        .single();
-      if (error) throw error;
-      patient = data as Patient;
-    }
-
-    if (!patient) {
-      return NextResponse.json(
-        { error: "Provide `patient` object or `patient_id`" },
-        { status: 400 },
-      );
-    }
-
-    const question = (body.question || "").toString().trim();
+    const question = (body.question ?? "").toString().trim();
     if (!question) {
-      return NextResponse.json(
-        { error: "Provide a clinical `question`" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Provide a clinical `question`" }, { status: 400 });
     }
 
-    // 1. Run safety engine
-    const safetyReport = await runSafetyChecks(patient);
+    // 1. Safety engine + 2. both prompts, settled before any model call.
+    const prompts = await post<Composed>("/compose-prompt", {
+      ...(body.patient !== undefined
+        ? { patient: body.patient }
+        : { patient_id: body.patient_id }),
+      question,
+    });
 
-    // 2. Compose both prompts
-    const prompts = await composePrompt(patient, safetyReport, question);
-
-    // 3. Call LLM in parallel for both
+    // 3. Call the LLM in parallel for both arms.
     const [genericResp, optionCResp] = await Promise.all([
       callLLM(prompts.generic),
       callLLM(prompts.optionC),
@@ -105,12 +91,10 @@ export async function POST(req: Request) {
         prompt: prompts.generic,
         response: genericResp,
       },
-      safety_report: safetyReport,
+      safety_report: prompts.report,
     });
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message ?? "LLM API error" },
-      { status: 500 },
-    );
+  } catch (err) {
+    const { body, status } = errorResponse(err);
+    return NextResponse.json(body, { status });
   }
 }

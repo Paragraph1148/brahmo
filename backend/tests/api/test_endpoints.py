@@ -184,3 +184,19 @@ def test_responses_carry_server_timing(client: TestClient) -> None:
     """The seam the query telemetry will hang off."""
     response = client.get("/health")
     assert response.headers["Server-Timing"].startswith("app;dur=")
+
+
+def test_patient_listing_can_return_full_records(
+    client: TestClient, api_corpus: Corpus
+) -> None:
+    """The UI's patient panel needs bmi, insurance, medications and allergies."""
+    full = client.get("/patients", params={"detail": "full"}).json()
+    assert [p["id"] for p in full] == [p.id for p in api_corpus.seeded_patients]
+    for row in full:
+        assert Patient.model_validate(row)
+        assert "bmi" in row and "insurance" in row
+        assert "medications" in row and "allergies" in row
+
+
+def test_patient_listing_rejects_an_unknown_detail_level(client: TestClient) -> None:
+    assert client.get("/patients", params={"detail": "everything"}).status_code == 422

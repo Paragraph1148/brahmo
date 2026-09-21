@@ -95,9 +95,23 @@ def create_app(
             model=app.state.model.name,
         )
 
-    @app.get("/patients", response_model=list[PatientSummary], tags=["patients"])
-    def list_patients(corpus: Corpus = Depends(get_corpus)) -> list[PatientSummary]:
-        return [PatientSummary.of(p) for p in corpus.seeded_patients]
+    @app.get("/patients", tags=["patients"])
+    def list_patients(
+        detail: str = "summary", corpus: Corpus = Depends(get_corpus)
+    ) -> list[dict[str, Any]]:
+        """The seeded patients.
+
+        ``detail=summary`` (the default) is enough to render a picker.
+        ``detail=full`` returns whole records, which is what a patient panel
+        needs and what saves it a request per patient to fill one in.
+        """
+        if detail not in ("summary", "full"):
+            raise HTTPException(
+                status_code=422, detail="detail must be 'summary' or 'full'"
+            )
+        if detail == "full":
+            return [p.model_dump(by_alias=True) for p in corpus.seeded_patients]
+        return [PatientSummary.of(p).model_dump() for p in corpus.seeded_patients]
 
     @app.get("/patients/{patient_id}", tags=["patients"])
     def get_patient(patient_id: int, corpus: Corpus = Depends(get_corpus)) -> dict[str, Any]:

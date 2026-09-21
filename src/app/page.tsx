@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import type { Patient, SafetyReport, SafetyFlag } from "@/lib/types";
-import { supabase } from "@/lib/supabase";
 
 const SEVERITY_STYLES: Record<SafetyFlag["severity"], string> = {
   critical: "bg-red-50 border-red-300 text-red-900",
@@ -67,15 +66,17 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const { data, error } = await supabase
-        .from("patients")
-        .select("*")
-        .order("id");
-      if (error) {
-        setError(error.message);
-        return;
+      // Patients come from the safety service rather than straight from
+      // Supabase: the browser no longer needs database credentials or any
+      // knowledge of the schema.
+      try {
+        const res = await fetch("/api/patients");
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Could not load patients");
+        setPatients(data as Patient[]);
+      } catch (e: any) {
+        setError(e.message);
       }
-      setPatients((data ?? []) as Patient[]);
     })();
   }, []);
 

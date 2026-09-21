@@ -2,42 +2,25 @@
 // POST /api/safety-check
 // Body: { patient: Patient }   OR   { patient_id: number }
 // Returns: SafetyReport
+//
+// Proxies to the Python safety service. The response shape is unchanged
+// from when this route ran the TypeScript engine, with two additions the
+// UI may ignore: `computed.eGFR_exact` (unrounded, what the CKD bands are
+// read from) and `flags[].provenance`.
 // =================================================================
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
-import { runSafetyChecks } from "@/lib/safety-engine";
-import type { Patient } from "@/lib/types";
+import { errorResponse, post } from "@/lib/backend";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    let patient: Patient | null = null;
-
-    if (body.patient) {
-      patient = body.patient as Patient;
-    } else if (typeof body.patient_id === "number") {
-      const { data, error } = await supabase
-        .from("patients")
-        .select("*")
-        .eq("id", body.patient_id)
-        .single();
-      if (error) throw error;
-      patient = data as Patient;
-    }
-
-    if (!patient) {
-      return NextResponse.json(
-        { error: "Provide `patient` object or `patient_id`" },
-        { status: 400 }
-      );
-    }
-
-    const report = await runSafetyChecks(patient);
-    return NextResponse.json(report);
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message ?? "Safety engine error" },
-      { status: 500 }
-    );
+    const payload =
+      body.patient !== undefined
+        ? { patient: body.patient }
+        : { patient_id: body.patient_id };
+    return NextResponse.json(await post("/safety-check", payload));
+  } catch (err) {
+    const { body, status } = errorResponse(err);
+    return NextResponse.json(body, { status });
   }
 }

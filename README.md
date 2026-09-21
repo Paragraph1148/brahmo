@@ -111,8 +111,14 @@ JSONB at runtime, so `drugs_for_condition('respiratory')` works the moment the r
 exist. `docs/architecture.md` has the details.
 
 ```
+backend/                the Python service — see backend/README.md
+  src/brahmo/engine.py  8 deterministic checkers — no model call on this path
+  src/brahmo/api/       FastAPI: /safety-check, /compose-prompt, /consult
+
 src/lib/
-  safety-engine.ts      8 deterministic checkers — no model call on this path
+  backend.ts            client the /api routes proxy through
+  safety-engine.ts      the original engine — off the request path now, kept
+                        because the Python port is verified against it
   calculators.ts        eGFR (CKD-EPI 2021), CHA₂DS₂-VASc, BMI
   prompt-composer.ts    builds the India-specific prompt from the database
   conditions.ts         shared condition-detection predicates
@@ -142,15 +148,29 @@ npm run inspect 6 7       # dump the safety report for given patient ids
 ```
 
 The test suite needs no Supabase project and no API key — PGlite supplies the database
-in-process. To run the **application**, you need both:
+in-process.
+
+### Running the application
+
+Two processes: the Next.js frontend, and the Python service holding the
+deterministic layer.
 
 ```bash
-cp .env.local.example .env.local   # add Supabase URL + anon key, and GROQ_API_KEY
+# terminal 1 — the safety service (no database, no API key)
+cd backend && uv sync && uv run uvicorn --factory brahmo.api:create_app
+
+# terminal 2 — the frontend
+cp .env.local.example .env.local   # GROQ_API_KEY for the model call
 npm run dev                        # http://localhost:3000
 ```
 
-Load `supabase/schema.sql` then `supabase/seed.sql` in the Supabase SQL editor, and
-verify with `SELECT COUNT(*) FROM drugs;` → 48.
+The `/api/*` routes proxy to the safety service, so the browser talks to one origin
+and never holds the service URL or a database credential. If the service is not
+running the UI says so, with the command to start it.
+
+Only the model call still needs a key. `GROQ_API_KEY` is optional: without it the
+safety report and both composed prompts still render, which is the part of the
+system this project is actually about.
 
 ---
 

@@ -597,8 +597,24 @@ def _check_anticoagulation(patient: Patient, chads_vasc: int | None) -> list[Saf
 def _recommend_drug_classes(
     patient: Patient, egfr: float | None
 ) -> tuple[list[str], list[SafetyFlag]]:
+    """Classes this profile indicates, each named once.
+
+    Several rules can reach the same class — a patient with diabetes, heart
+    failure and CKD 3a satisfies both the HF and the CKD branch, and both
+    recommend an SGLT2 inhibitor. The original appends unconditionally, so
+    seeded patient #6 carries "SGLT2 inhibitor" twice and the prompt says it
+    twice under RECOMMENDED DRUG CLASSES. Repetition is not emphasis in a
+    prompt built to be precise, and the clinician sees the row twice too.
+
+    The separate flags are kept: two rules reaching the same class for
+    different reasons is worth showing, and each explains its own reasoning.
+    """
     classes: list[str] = []
     flags: list[SafetyFlag] = []
+
+    def indicate(drug_class: str) -> None:
+        if drug_class not in classes:
+            classes.append(drug_class)
 
     def rec(rule_id: str, title: str, detail: str, **kw: object) -> None:
         flags.append(
@@ -613,7 +629,7 @@ def _recommend_drug_classes(
         )
 
     if is_diabetic(patient) and is_hf(patient):
-        classes.append("SGLT2 inhibitor")
+        indicate("SGLT2 inhibitor")
         rec(
             "recommend.sglt2_hf",
             "First-line: SGLT2 inhibitor for diabetes + HF",
@@ -626,7 +642,7 @@ def _recommend_drug_classes(
 
     if is_diabetic(patient) and egfr is not None and egfr < 60:
         if egfr >= 25:
-            classes.append("SGLT2 inhibitor")
+            indicate("SGLT2 inhibitor")
             rec(
                 "recommend.sglt2_ckd",
                 "Consider SGLT2 inhibitor for diabetic kidney disease",
@@ -636,7 +652,7 @@ def _recommend_drug_classes(
                 guideline_source="RSSDI 2022",
             )
         else:
-            classes.append("DPP4 inhibitor (Linagliptin)")
+            indicate("DPP4 inhibitor (Linagliptin)")
             rec(
                 "recommend.linagliptin_advanced_ckd",
                 "Linagliptin: best DPP4i in advanced CKD",
@@ -657,7 +673,7 @@ def _recommend_drug_classes(
 
     if is_af(patient):
         if doac_contraindicated(patient):
-            classes.append("Warfarin (RHD/valvular AF)")
+            indicate("Warfarin (RHD/valvular AF)")
             flags.append(
                 SafetyFlag(
                     category="recommendation",
@@ -676,7 +692,7 @@ def _recommend_drug_classes(
                 )
             )
         else:
-            classes.append("DOAC")
+            indicate("DOAC")
             rec(
                 "recommend.doac_nonvalvular_af",
                 "Non-valvular AF: DOAC preferred over Warfarin",
