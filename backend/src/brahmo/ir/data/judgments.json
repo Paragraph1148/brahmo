@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "corpus": "guidelines",
+  "reviewed": false,
+  "about": [
+    "Relevance judgments: for each clinical question, which guidelines a",
+    "clinician needed in order to answer it.",
+    "",
+    "GRADES",
+    "  2 = essential   omitting it would leave the answer wrong or unsafe",
+    "  1 = useful      real supporting context; its absence weakens the answer",
+    "  0 = irrelevant  (omitted from the file rather than written out)",
+    "",
+    "STATUS: reviewed = false. These were written by reading each guideline's",
+    "text against each question, NOT derived from condition tags — grading tag",
+    "retrieval by tag overlap would guarantee the baseline wins and measure",
+    "nothing. They are nonetheless one non-clinician's reading and have not been",
+    "reviewed by a clinician. Every number computed from this file is provisional",
+    "until they are, and the harness prints that alongside its results.",
+    "",
+    "DISCIPLINE: labels are fixed before a retriever is scored, the same rule",
+    "tests/harness/phrasings.mts follows. Revising a judgment because a retriever",
+    "missed it is how an evaluation set stops measuring anything. If a judgment",
+    "is wrong, change it and say so in the commit — do not change it quietly."
+  ],
+  "queries": [
+    {
+      "id": "p1-second-line-under-cap",
+      "patient_id": 1,
+      "question": "HbA1c is 8.4% on Metformin 2g/day. What second-line agent should I add given his ₹5K/month insurance cap?",
+      "rationale": "The question is literally dual therapy after metformin, under a cost ceiling. The dual-therapy recommendation and the NLEM list are what answer it; targets, first-line context and the low-cost options are support.",
+      "judgments": {
+        "guideline:3": 2,
+        "guideline:28": 2,
+        "guideline:11": 1,
+        "guideline:6": 1,
+        "guideline:2": 1
+      }
+    },
+    {
+      "id": "p2-insulin-transition-ckd",
+      "patient_id": 2,
+      "question": "HbA1c is 9.2% on Metformin + Glimepiride, eGFR is 38. How should I transition this patient to insulin safely?",
+      "rationale": "Insulin initiation is the question; CKD drug choice governs what may be continued alongside. Hypoglycemia risk and targets shape the transition.",
+      "judgments": {
+        "guideline:7": 2,
+        "guideline:26": 2,
+        "guideline:5": 1,
+        "guideline:6": 1,
+        "guideline:28": 1
+      }
+    },
+    {
+      "id": "p3-new-t2dm-uninsured-driver",
+      "patient_id": 3,
+      "question": "Newly diagnosed T2DM. He's an auto-driver, no insurance, daily wage ₹800. What regimen?",
+      "rationale": "First-line therapy at diagnosis, decided under a hard affordability constraint: the resource-constrained recommendation and the NLEM list are the cost answer. He also has NAFLD, which changes which agents are attractive.",
+      "judgments": {
+        "guideline:2": 2,
+        "guideline:11": 2,
+        "guideline:28": 2,
+        "guideline:27": 1,
+        "guideline:8": 1,
+        "guideline:9": 1,
+        "guideline:6": 1
+      }
+    },
+    {
+      "id": "p4-acute-stemi-protocol",
+      "patient_id": 4,
+      "question": "STEMI just walked in — chest pain 2 hrs, anterior ST elevation. What's the immediate protocol?",
+      "rationale": "Diagnosis, reperfusion choice and antiplatelet loading are the immediate protocol. The penicillin-allergy guideline is essential for THIS patient specifically: it states the allergy does not contraindicate aspirin, clopidogrel or heparin, and withholding them would be the harm.",
+      "judgments": {
+        "guideline:12": 2,
+        "guideline:13": 2,
+        "guideline:14": 2,
+        "guideline:15": 2,
+        "guideline:19": 2,
+        "guideline:16": 1,
+        "guideline:18": 1,
+        "guideline:17": 1,
+        "guideline:29": 1
+      }
+    },
+    {
+      "id": "p5-triple-therapy-post-mi-af",
+      "patient_id": 5,
+      "question": "Post-MI on DAPT, now new AF. CHA₂DS₂-VASc is 3 (male threshold = ≥2). How do I manage triple therapy?",
+      "rationale": "Triple therapy duration is the question. The stroke-risk score and the anticoagulant choice decide what the third agent is and for how long.",
+      "judgments": {
+        "guideline:22": 2,
+        "guideline:20": 2,
+        "guideline:21": 2,
+        "guideline:17": 1,
+        "guideline:15": 1,
+        "guideline:29": 1
+      }
+    },
+    {
+      "id": "p6-diabetes-hf-ckd-optimisation",
+      "patient_id": 6,
+      "question": "HbA1c is 8.6% with HFrEF (EF 30%) and CKD 3a. How do I optimize her diabetes regimen given her cardiac status?",
+      "rationale": "Four essentials: SGLT2i first-line in HFrEF, the contraindicated agents in HF, the general comorbidity preference, and CKD drug choice. The hyperkalemia guideline is essential too rather than useful — she is on ramipril plus spironolactone with K+ 5.1, which is the exact situation it governs.",
+      "judgments": {
+        "guideline:23": 2,
+        "guideline:24": 2,
+        "guideline:4": 2,
+        "guideline:26": 2,
+        "guideline:25": 2,
+        "guideline:6": 1,
+        "guideline:3": 1
+      }
+    }
+  ]
+}

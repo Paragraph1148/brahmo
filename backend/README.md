@@ -7,7 +7,7 @@ input through both, so a rule that was ported wrong fails here.
 
 ```bash
 uv sync --extra dev
-uv run pytest                                            # 128 tests
+uv run pytest                                            # 167 tests
 uv run uvicorn --factory brahmo.api:create_app --reload  # http://127.0.0.1:8000
 ```
 
@@ -257,6 +257,81 @@ Every response carries `Server-Timing`. That is the seam the roadmap's query
 telemetry hangs off: one place that already knows the route and the wall-clock
 cost, so shipping those to a time-series store is a sink swap rather than a
 refactor.
+
+## Retrieval evaluation
+
+`brahmo.ir` measures what the prompt's guideline selection actually retrieves.
+
+```bash
+uv run python -m brahmo.ir.harness
+uv run python -m brahmo.ir.harness --k 5 --per-query
+```
+
+### The problem, measured
+
+Guideline selection is `condition_tags ? tag` — a boolean test against the
+patient's conditions. It never reads the clinician's question, so every
+question about a given patient retrieves the same set. And because the tags are
+derived generously, a multi-condition patient matches most of the corpus:
+
+| patient | tags | guidelines | drugs |
+|---|---|---|---|
+| Failing Metformin | diabetes, cardiovascular | 29/29 (100%) | 48/48 (100%) |
+| Complex with CKD | + ckd, complications | 29/29 (100%) | 48/48 (100%) |
+| Auto-Driver | diabetes, nafld | 17/29 (59%) | 22/48 (46%) |
+| Acute STEMI | cardiovascular | 14/29 (48%) | 31/48 (65%) |
+| Post-MI + New AF | + atrial_fibrillation | 29/29 (100%) | 48/48 (100%) |
+| Diabetes + Heart Failure | + heart_failure, ckd | 29/29 (100%) | 48/48 (100%) |
+
+Four of six get the entire corpus. That is not retrieval; it is sending
+everything and letting the model sort it out.
+
+### Results — k = 10, guideline corpus (29 documents), 6 judged queries
+
+**Provisional.** The judgments have not been reviewed by a clinician.
+
+| retriever | recall | nDCG | MRR | precision | avg returned |
+|---|---|---|---|---|---|
+| tag, untruncated *(ships today)* | **1.000** [0.610, 1.000] | 0.531 | — | 0.224 | 24.5 |
+| tag @10 | 0.332 | 0.275 | 0.302 | 0.250 | 10.0 |
+| bm25 | 0.650 | 0.618 | 0.889 | 0.417 | 9.0 |
+| bm25 within tags | 0.650 | **0.628** | **0.917** | 0.417 | 8.5 |
+| hybrid (tag + bm25, RRF) | 0.687 | 0.495 | 0.408 | 0.450 | 10.0 |
+
+Three things this says.
+
+**The shipped system buys perfect recall with precision of 0.224.** It finds
+every relevant guideline by sending 24.5 of 29. The ranked retrievers reach
+about two thirds of the relevant set while sending a third as much, and put the
+first relevant document at rank ~1.1 (MRR 0.917).
+
+**Fusing an unranked retriever hurts.** The hybrid has the best recall and the
+second-worst MRR. Tag containment is boolean, so its "ranking" is document-id
+order, and reciprocal rank fusion treats that arbitrary order as signal. An
+unranked retriever belongs in a filter, not a fusion — which is what
+`bm25 within tags` is, and it scores best on both ranking metrics.
+
+**Six queries cannot separate any of these.** Every interval overlaps the
+baseline's. The harness says so on every run rather than leaving the reader to
+notice.
+
+### Keeping the evaluation honest
+
+`ir/data/judgments.json` holds 39 relevance judgments across 6 queries, graded
+essential / useful, each with a written rationale. They were made by reading
+each guideline against each question — **not** derived from `condition_tags`,
+because grading tag retrieval by tag overlap would hand the baseline a perfect
+score while measuring nothing. `test_the_judgments_are_not_a_restatement_of_the_tags`
+asserts that the baseline's precision stays below 0.5, which is evidence the
+labels carry information the tags do not.
+
+Labels are fixed before a retriever is scored, the same rule
+`tests/harness/phrasings.mts` follows. A judgment that turns out to be wrong
+gets changed in a commit that says so, never quietly.
+
+Scoped to guidelines. Judging all 48 drug entries per question is a separate
+labelling pass, and mixing unjudged documents into the store would charge every
+retriever for returning them.
 
 ## Design changes from the TypeScript
 
