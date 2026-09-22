@@ -7,7 +7,7 @@ input through both, so a rule that was ported wrong fails here.
 
 ```bash
 uv sync --extra dev
-uv run pytest                                            # 180 tests
+uv run pytest                                            # 197 tests
 uv run uvicorn --factory brahmo.api:create_app --reload  # http://127.0.0.1:8000
 ```
 
@@ -383,6 +383,55 @@ What would make it viable is more judged queries, not more model. Roughly 50
 would support a held-out half for evaluation; training a reranker needs
 hundreds. Expanding the judged set is the prerequisite, and it is a labelling
 job, not a modelling one.
+
+### Expanding the judged set
+
+44 more questions are drafted in `ir/data/questions_draft.json`, awaiting
+grades. With the existing 6 that is 50 — roughly what a held-out half needs to
+be worth reporting.
+
+They carry **no grades**. Adding them would repeat the existing set's problem —
+one non-clinician's reading standing in for a clinical one — at seven times the
+scale.
+
+Each names the retrieval failure it is built to expose, because a set made only
+of questions whose words appear in their answer measures lexical overlap and
+nothing else:
+
+| probes | n | what it catches |
+|---|---|---|
+| lexical | 18 | the easy case, for contrast |
+| vocabulary-gap | 7 | the answer uses different words than the question |
+| negative | 7 | nothing in the corpus answers it |
+| cost | 5 | affordability, often with no clinical vocabulary at all |
+| multi-hop | 4 | needs two guidelines combined |
+| distractor | 3 | an obvious keyword points at the wrong guideline |
+
+The negative controls matter most. Without them, no metric can see a retriever
+that answers confidently when it should return nothing — and the pool for
+*"which of her drugs are teratogenic"* leads with **Diabetes + HF — drugs to
+AVOID**, which is exactly that failure.
+
+They also cover patients 7–9, which the judged set omitted entirely.
+
+#### Labelling
+
+```bash
+uv run python -m brahmo.ir.worksheet -o ../docs/judgment-worksheet.md
+uv run python -m brahmo.ir.worksheet --json -o ../docs/judgment-skeleton.json
+```
+
+Judging 44 questions against 29 guidelines is 1,276 decisions. Pooling — taking
+the union of each retriever's top 8 — cuts it to **631**, averaging 14 candidates
+per question. This is how TREC collections are built.
+
+Pooling's bias is that a document no retriever surfaced is never judged, so
+recall against the finished set is optimistic. Two things limit it here: the
+corpus is 29 documents, and the pool includes the cross-encoder, so a guideline
+answering a question in words it never uses still reaches the reviewer.
+`test_the_vocabulary_gap_answer_reaches_the_pool` pins that on the case where it
+matters — the penicillin-allergy guideline for patient 4. The worksheet prints
+each pool's coverage so a reader can judge the bias themselves.
 
 ### Keeping the evaluation honest
 

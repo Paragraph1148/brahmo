@@ -117,13 +117,42 @@ class Corpus:
         )
 
     @cached_property
+    def held_out_patients(self) -> tuple[Patient, ...]:
+        """Patients 7-9, which live as JSON beside the app rather than in the seed.
+
+        They exist to be cases the system was not built around. Loading them
+        here lets the retrieval evaluation ask questions about them too, which
+        is where a retriever tuned on the seeded six would show its seams.
+        """
+        directory = Path(__file__).resolve().parents[3] / "outputs" / "surprise-patients"
+        if not directory.is_dir():
+            return ()
+        patients: list[Patient] = []
+        for path in sorted(directory.glob("*.json")):
+            try:
+                payload = json.loads(path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError as exc:
+                raise CorpusError(f"{path} is not valid JSON: {exc}") from exc
+            record = payload.get("patient")
+            if record:
+                patients.append(Patient.model_validate(record))
+        return tuple(sorted(patients, key=lambda p: p.id))
+
+    @cached_property
+    def all_patients(self) -> tuple[Patient, ...]:
+        return tuple(
+            sorted([*self.seeded_patients, *self.held_out_patients], key=lambda p: p.id)
+        )
+
+    @cached_property
     def seeded_patients(self) -> tuple[Patient, ...]:
         return tuple(
             Patient.model_validate(row) for row in sorted(self.patients, key=lambda r: r["id"])
         )
 
     def patient(self, patient_id: int) -> Patient | None:
-        return next((p for p in self.seeded_patients if p.id == patient_id), None)
+        """Any patient the system knows, seeded or held out."""
+        return next((p for p in self.all_patients if p.id == patient_id), None)
 
     def describe(self) -> dict[str, int]:
         """Row counts, for the health endpoint."""
@@ -133,6 +162,7 @@ class Corpus:
             "guidelines": len(self.guidelines),
             "formulary_entries": len(self.stock),
             "seeded_patients": len(self.patients),
+            "held_out_patients": len(self.held_out_patients),
         }
 
 
