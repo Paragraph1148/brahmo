@@ -14,7 +14,15 @@ from brahmo.corpus import Corpus, load_default
 from brahmo.ir.documents import DocumentStore
 from brahmo.ir.judgments import JudgmentSet
 from brahmo.ir.metrics import Evaluation, evaluate
-from brahmo.ir.retrievers import Query, Retriever, TagRetriever, build_all
+from brahmo.ir.reranker import ScoresUnavailable, build_reranked
+from brahmo.ir.retrievers import (
+    BM25Retriever,
+    Query,
+    Retriever,
+    TagFilteredBM25,
+    TagRetriever,
+    build_all,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -56,6 +64,29 @@ class Campaign:
     def run_all(self, k: int) -> list[Evaluation]:
         return [self.run(r, k) for r in build_all(self.store)]
 
+    def reranked(self, depth: int = 40, allow_compute: bool = False) -> tuple[Retriever, ...]:
+        """Reranked configurations, from cached scores unless told otherwise.
+
+        The tag-set rerank is first because it is the deployable one: it ranks
+        and trims exactly what the system already sends, so it cannot surface a
+        document the current behaviour would have withheld.
+        """
+        bm25 = BM25Retriever(self.store)
+        stages = (
+            TagRetriever(self.store),
+            TagFilteredBM25(self.store, bm25),
+            bm25,
+        )
+        return build_reranked(
+            self.store, stages, allow_compute=allow_compute, depth=depth
+        )
+
+    def run_reranked(self, k: int, depth: int = 40, allow_compute: bool = False):
+        try:
+            return [self.run(r, k) for r in self.reranked(depth, allow_compute)]
+        except ScoresUnavailable as exc:
+            return exc
+
     def run_untruncated_baseline(self) -> Evaluation:
         """The shipped system as it actually behaves: everything, unranked.
 
@@ -78,6 +109,18 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--k", type=int, default=10, help="cutoff for the @k metrics")
     parser.add_argument("--per-query", action="store_true", help="also break down by query")
+    parser.add_argument(
+        "--depth",
+        type=int,
+        default=40,
+        help="reranker candidate depth; it caps recall, since nothing outside "
+        "the first stage's top --depth can be recovered",
+    )
+    parser.add_argument(
+        "--compute",
+        action="store_true",
+        help="score uncached pairs with the model (needs --extra rerank)",
+    )
     args = parser.parse_args()
 
     campaign = Campaign.build()
@@ -107,9 +150,18 @@ def main() -> None:
     evaluations = campaign.run_all(args.k)
     for evaluation in evaluations:
         print(evaluation.row())
+
+    reranked = campaign.run_reranked(args.k, depth=args.depth, allow_compute=args.compute)
+    if isinstance(reranked, ScoresUnavailable):
+        print(f"\n  (reranked configurations skipped: {reranked})")
+        reranked = []
+    else:
+        print()
+        for evaluation in reranked:
+            print(evaluation.row())
     print(rule)
 
-    baseline, *rest = evaluations
+    baseline, *rest = [*evaluations, *reranked]
     for evaluation in rest:
         delta = evaluation.ndcg.point - baseline.ndcg.point
         overlap = not (
@@ -129,7 +181,7 @@ def main() -> None:
     if args.per_query:
         print()
         print(rule)
-        for evaluation in evaluations:
+        for evaluation in [*evaluations, *reranked]:
             print(f"\n{evaluation.name}")
             for result in evaluation.per_query:
                 print(

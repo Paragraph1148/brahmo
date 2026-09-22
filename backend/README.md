@@ -7,7 +7,7 @@ input through both, so a rule that was ported wrong fails here.
 
 ```bash
 uv sync --extra dev
-uv run pytest                                            # 167 tests
+uv run pytest                                            # 180 tests
 uv run uvicorn --factory brahmo.api:create_app --reload  # http://127.0.0.1:8000
 ```
 
@@ -314,6 +314,75 @@ unranked retriever belongs in a filter, not a fusion — which is what
 **Six queries cannot separate any of these.** Every interval overlaps the
 baseline's. The harness says so on every run rather than leaving the reader to
 notice.
+
+### Reranking
+
+```bash
+uv run --extra rerank python -m brahmo.ir.rerank_cache   # once, fills the cache
+uv run python -m brahmo.ir.harness                        # runs from cache, no torch
+```
+
+A cross-encoder (`ms-marco-MiniLM-L-6-v2`) reads the query and document
+together, so it can match a question about rheumatic mitral stenosis to a
+recommendation that never uses the word "rheumatic". All 174 judged pairs are
+cached in `ir/data/rerank_scores.json`, so the numbers reproduce for someone
+with neither torch nor a GPU — the test suite runs entirely from it.
+
+| retriever | recall | nDCG | MRR | precision |
+|---|---|---|---|---|
+| tag @10 | 0.332 | 0.275 | 0.302 | 0.250 |
+| bm25 within tags | 0.650 | 0.628 | **0.917** | 0.417 |
+| **rerank(tag)** | **0.792** | **0.665** | 0.867 | **0.517** |
+| rerank(bm25 within tags) | 0.683 | 0.604 | 0.867 | 0.433 |
+
+**Reranking helps where there was no ranking, and not otherwise.** On the tag
+set — unranked by construction — it lifts nDCG by 0.390 and more than doubles
+recall@10. On BM25, which already ranks well, it makes things slightly *worse*
+(nDCG 0.628 → 0.604). A general-purpose MS MARCO reranker has nothing to add
+to lexical matching that already works on a corpus this small and this
+term-dense; it only has something to add where no ordering existed.
+
+That is the argument for a domain-tuned reranker rather than against reranking.
+See the next section for why that is not done here.
+
+**BM25 has a recall ceiling the reranker does not.** Sweeping the cutoff:
+
+| k | rerank(tag) recall | bm25-in-tags recall |
+|---|---|---|
+| 10 | 0.792 | 0.650 |
+| 15 | 0.891 | 0.683 |
+| 20 | 0.972 | 0.683 |
+| 29 | 1.000 | **0.683 — plateau** |
+
+BM25 cannot reach the last third at any cutoff: those guidelines share no terms
+with the question. The cross-encoder reaches all of them.
+
+**The deployable change.** Reranking the tag set and cutting at 15 keeps 89% of
+the relevant guidelines while sending 15 documents instead of 24.5 — a 39%
+smaller guideline payload. It cannot surface anything the current system would
+have withheld, because it only ranks and trims what tags already admit.
+
+`--depth` caps all of this: nothing outside the first stage's top *depth* can be
+recovered, so recall is inherited. Raising it from 25 to 40 moved rerank(tag)
+recall@10 from 0.701 to 0.792 — worth knowing before reading any of these
+numbers as a property of the reranker rather than of the pipeline.
+
+### Why there is no fine-tuned reranker here
+
+The plan for this phase was to mine hard negatives from the retrieval failures
+and LoRA-fine-tune the cross-encoder on them. That is not defensible at this
+data scale, and doing it anyway would produce a number that means nothing.
+
+The arithmetic: 6 queries × 29 documents is 174 query-document pairs, 39 of them
+positive. Reranker fine-tuning normally uses five or six orders of magnitude
+more. Worse, there is no held-out split worth the name — partitioning 6 queries
+gives 4 to train and 2 to test, and a "lift" measured that way is a measurement
+of memorisation.
+
+What would make it viable is more judged queries, not more model. Roughly 50
+would support a held-out half for evaluation; training a reranker needs
+hundreds. Expanding the judged set is the prerequisite, and it is a labelling
+job, not a modelling one.
 
 ### Keeping the evaluation honest
 
