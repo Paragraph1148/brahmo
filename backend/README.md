@@ -7,7 +7,7 @@ input through both, so a rule that was ported wrong fails here.
 
 ```bash
 uv sync --extra dev
-uv run pytest                                            # 206 tests
+uv run pytest                                            # 211 tests
 uv run uvicorn --factory brahmo.api:create_app --reload  # http://127.0.0.1:8000
 ```
 
@@ -444,12 +444,23 @@ uv run python -m brahmo.ir.worksheet -o ../docs/judgment-worksheet.md
 uv run python -m brahmo.ir.worksheet --json -o ../docs/judgment-skeleton.json
 ```
 
-`docs/label.html` is the fast path: one question and one candidate at a time,
-graded with `y` / `n` / `e`, progress kept in the browser so it can be done in
-pieces, and the finished grades exported as JSON to merge back. It is
-self-contained — no server, no network, nothing uploaded — and 631 decisions
-runs about an hour. The markdown worksheet is the same content for anyone who
-would rather read on paper.
+Two pages, same pooled set, differing only in where the grades live.
+
+`brahmo.ir.online` publishes an Artifact whose grades go to its shared
+database, so the pass can be done on a phone in spare moments and read back
+here with `ArtifactData` to commit. It writes one document per question,
+`grades/<question-id>`, flushed after a pause rather than on every tap — 631
+writes would be a burst the store is right to throttle, and 44 documents on a
+lull is the same information at a hundredth of the traffic. The store wins over
+local state where the two disagree, so a stale phone cannot undo a laptop.
+
+`brahmo.ir.labeller` writes `docs/label.html`, which keeps everything in the
+browser and exports JSON. No server, no network, nothing uploaded. Use it to
+work offline, or if the data should not leave the machine.
+
+Either way it is one question and one candidate at a time, graded `y` / `n` /
+`e`, resumable, about an hour for 631. The markdown worksheet is the same
+content for anyone who would rather read on paper.
 
 Judging 44 questions against 29 guidelines is 1,276 decisions. Pooling — taking
 the union of each retriever's top 8 — cuts it to **631**, averaging 14 candidates

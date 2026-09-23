@@ -15,6 +15,11 @@ def _payload(page: str) -> dict:
     return json.loads(body)
 
 
+def _payload_online(page: str) -> dict:
+    body = page.split("const DATA = ", 1)[1].split(";\n\nconst PAIRS", 1)[0]
+    return json.loads(body)
+
+
 def test_the_page_is_self_contained() -> None:
     """It has to open from disk with no server and nothing leaving the machine."""
     page = build_page()
@@ -107,3 +112,62 @@ def test_no_grade_is_pre_filled_in_the_page() -> None:
     """Shipping opinions as defaults is the mistake this whole tier split fixes."""
     page = build_page()
     assert re.search(r"grades\s*=\s*\{\}", page)
+
+
+# -- the online page --------------------------------------------------------
+
+
+def test_the_online_page_carries_the_same_pairs() -> None:
+    """Both pages judge the same pooled set; only where grades live differs."""
+    from brahmo.ir.online import build_page as build_online
+
+    local = _payload(build_page())
+    online = _payload_online(build_online())
+    assert [q["id"] for q in online["questions"]] == [q["id"] for q in local["questions"]]
+    assert sum(len(q["candidates"]) for q in online["questions"]) == sum(
+        len(q["candidates"]) for q in local["questions"]
+    )
+
+
+def test_the_online_page_reaches_the_store_defensively() -> None:
+    """Opened from disk there is no namespace, and absence is a supported state."""
+    from brahmo.ir.online import build_page as build_online
+
+    page = build_online()
+    assert 'window.claude?.use?.("db")' in page
+    assert 'if (!store) { setStatus("offline"); return; }' in page
+
+
+def test_the_online_page_writes_one_document_per_question() -> None:
+    """631 writes would be a burst the store is right to throttle."""
+    from brahmo.ir.online import build_page as build_online
+
+    page = build_online()
+    assert 'db.doc("grades/" + qid).set(' in page
+    assert "setTimeout(() => flush(qid), 700)" in page
+
+
+def test_the_online_page_renders_before_the_store_answers() -> None:
+    """First paint must not wait on a capability that may never resolve."""
+    from brahmo.ir.online import build_page as build_online
+
+    page = build_online()
+    body = page.split("<script>", 1)[1]
+    first_render = body.index("\nrender();")
+    store_call = body.index('window.claude?.use?.("db")')
+    assert first_render < store_call
+
+
+def test_the_online_page_only_loads_allowed_hosts() -> None:
+    from brahmo.ir.online import build_page as build_online
+
+    page = build_online()
+    hosts = {
+        # Close the quote before splitting the path: a bare origin like
+        # href="https://fonts.gstatic.com" has no trailing slash, so splitting
+        # on "/" alone carries the rest of the attribute into the host.
+        line.split('href="', 1)[1].split('"', 1)[0].split("/")[2]
+        for line in page.splitlines()
+        if 'href="https://' in line
+    }
+    assert hosts <= {"fonts.googleapis.com", "fonts.gstatic.com"}, hosts
