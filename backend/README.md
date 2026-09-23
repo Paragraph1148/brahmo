@@ -7,7 +7,7 @@ input through both, so a rule that was ported wrong fails here.
 
 ```bash
 uv sync --extra dev
-uv run pytest                                            # 197 tests
+uv run pytest                                            # 206 tests
 uv run uvicorn --factory brahmo.api:create_app --reload  # http://127.0.0.1:8000
 ```
 
@@ -414,12 +414,42 @@ AVOID**, which is exactly that failure.
 
 They also cover patients 7–9, which the judged set omitted entirely.
 
+#### Two tiers, and who can set each
+
+A relevance judgment here is two questions wearing one label, and only one of
+them needs a clinician.
+
+| grade | the question | who can answer it |
+|---|---|---|
+| **1 — answers it** | Does this text contain information that directly addresses what was asked? | Anyone reading carefully |
+| **2 — essential** | Would omitting it leave the answer *wrong or unsafe*? | A clinician |
+
+Recall, precision and MRR only ask whether a document is relevant at all, so
+they rest entirely on tier 1 and stop being provisional the moment the reading
+pass is done. nDCG weights by grade, so it rests on tier 2 and stays
+provisional until a clinician has been through it. `JudgmentSet.caveat` prints
+which of the two any given run depends on, and the harness prints it above
+every table.
+
+A tier-2 grade set by a non-clinician is an upgrade *proposed*, not confirmed,
+and both the file and the export say so. This is not a formality: getting it
+wrong in the safe-looking direction — marking something essential that is not —
+inflates nDCG for whichever retriever happens to rank it highly.
+
 #### Labelling
 
 ```bash
+uv run python -m brahmo.ir.labeller -o ../docs/label.html   # then open it
 uv run python -m brahmo.ir.worksheet -o ../docs/judgment-worksheet.md
 uv run python -m brahmo.ir.worksheet --json -o ../docs/judgment-skeleton.json
 ```
+
+`docs/label.html` is the fast path: one question and one candidate at a time,
+graded with `y` / `n` / `e`, progress kept in the browser so it can be done in
+pieces, and the finished grades exported as JSON to merge back. It is
+self-contained — no server, no network, nothing uploaded — and 631 decisions
+runs about an hour. The markdown worksheet is the same content for anyone who
+would rather read on paper.
 
 Judging 44 questions against 29 guidelines is 1,276 decisions. Pooling — taking
 the union of each retriever's top 8 — cuts it to **631**, averaging 14 candidates
